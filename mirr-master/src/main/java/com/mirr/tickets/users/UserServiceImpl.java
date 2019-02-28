@@ -1,8 +1,5 @@
 package com.mirr.tickets.users;
 
-import com.mirr.tickets.users.UserDto;
-import com.mirr.tickets.users.UserService;
-
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
