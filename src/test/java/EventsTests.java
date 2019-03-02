@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNotEquals;
 
 public class EventsTests {
 
@@ -39,12 +39,14 @@ public class EventsTests {
         return eventServiceDto;
     }
 
-//    @Test
-//    public EventServiceDto getAllEvents() {
-//
-//        EventServiceDto initEvents = initEvent();
-//       // EventServiceDto eventServiceDto = eventService.getAll();
-//
-//    }
+    @Test
+    public void getAllEvents() {
+
+        EventServiceDto event = initEvent();
+        eventService.save(event);
+        List<EventServiceDto> eventDtoList = eventService.getAll();
+        assertNotEquals("Event collection is empty", eventDtoList.size(), 0);
+
+    }
 
 }
