@@ -1,7 +1,6 @@
 import com.mirr.tickets.users.UserDto;
 import com.mirr.tickets.users.UserService;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -22,6 +21,9 @@ public class UsersTest {
 
     private UserDto initUser() {
         UserDto testUserDto = new UserDto();
-        testUserDto.setEmail();
+        testUserDto.setEmail("kseniamirr@gmail.com");
+        return testUserDto;
     }
+
+
 }
