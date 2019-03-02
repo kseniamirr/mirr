@@ -4,7 +4,7 @@ import com.mirr.tickets.users.UserDto;
 
 import java.util.List;
 
-interface UserService {
+public interface UserService {
 
     UserDto save(UserDto userDto);
 

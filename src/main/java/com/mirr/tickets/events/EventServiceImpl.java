@@ -1,9 +1,20 @@
 package com.mirr.tickets.events;
 
+import com.mirr.tickets.users.UserService;
+import com.mirr.tickets.users.UserServiceImpl;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 import java.util.List;
 
 public class EventServiceImpl implements EventService {
+
+    @Getter
+    @Setter
+    private UserService userService;
+
     public EventServiceDto save(EventServiceDto eventServiceDto) {
         return null;
     }
