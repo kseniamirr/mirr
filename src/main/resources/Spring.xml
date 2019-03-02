@@ -7,7 +7,7 @@
 
     <bean id="users" class="com.mirr.tickets.users.UserServiceImpl"/>
 
-    <bean id="events" class="com.mirr.tickets.users.EventsServiceImpl">
+    <bean id="events" class="com.mirr.tickets.events.EventsServiceImpl">
     </bean>
 
     <bean id="discount" class="com.mirr.tickets.users.DiscountServiceImpl"/>
