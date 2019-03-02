@@ -1,14 +1,26 @@
 package com.mirr.tickets.users;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class UserServiceImpl implements UserService {
+
+    private static SortedSet<UserDto> sortedSetUsers = new TreeSet<>();
 
 
     @Override
     public UserDto save(UserDto userDto) {
-        return null;
-    }
+        try {
+            int id =
+                    sortedSetUsers.last().getId() + 1;
+            userDto.setId(id);
+        } catch (NoSuchElementException e) {
+            sortedSetUsers.add(userDto);
+        }
+            return userDto;
+        }
 
     @Override
     public void remove(int id) {
