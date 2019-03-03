@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AuditoriumServiceDto {
+public class AuditoriumDto {
 
     String name;
     int numberOfSeats;

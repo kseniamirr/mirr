@@ -1,0 +1,7 @@
+1. Implement static collection and the following methods in Event Service:
+save, remove, getById, getUserByName, getAll()
+2.  Implement static collection and the following methods in Audiotorium Service and read/write from property file:
+getAll, getByName(String name);
+3. Implement collection EventOccurence in Event Service and the following methods
+getForDateRange(Date from, Date to), getNextEvents(Date to);
+4. Implement tickets collection in BookingService

@@ -1,5 +1,5 @@
 import com.mirr.tickets.events.EventService;
-import com.mirr.tickets.events.EventServiceDto;
+import com.mirr.tickets.events.EventDto;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,39 +12,39 @@ public class EventsTests {
     EventService eventService;
 
     @Test
-    public void getPriceEventsTest() {
-        EventServiceDto eventServiceDto = initPriceForTicket();
-        eventServiceDto.getPriceForTicket();
-        assertEquals("The price is not correct", 200, eventServiceDto.getPriceForTicket());
+    public void getNameTest() {
+        EventDto eventDto = initName();
+        eventDto.getName();
+        assertEquals("The name is not correct", "Blue", eventDto.getName());
 
     }
 
-    private EventServiceDto initPriceForTicket() {
-        EventServiceDto eventServiceDto = new EventServiceDto();
-        eventServiceDto.setPriceForTicket(150);
-        return eventServiceDto;
+    private EventDto initName() {
+        EventDto eventDto = new EventDto();
+        eventDto.setName("Blue");
+        return eventDto;
     }
 
     @Test
     public void getEventIdTest() {
-        EventServiceDto eventServiceDto = initEvent();
-        eventServiceDto.getId();
-       assertEquals("Id is not correct", 0355, eventServiceDto);
+        EventDto eventDto = initEvent();
+        eventDto.getId();
+       assertEquals("Id is not correct", 0355, eventDto);
 
     }
 
-    private EventServiceDto initEvent() {
-        EventServiceDto eventServiceDto = new EventServiceDto();
-        eventServiceDto.setId(0355);
-        return eventServiceDto;
+    private EventDto initEvent() {
+        EventDto eventDto = new EventDto();
+        eventDto.setId(0355);
+        return eventDto;
     }
 
     @Test
     public void getAllEvents() {
 
-        EventServiceDto event = initEvent();
+        EventDto event = initEvent();
         eventService.save(event);
-        List<EventServiceDto> eventDtoList = eventService.getAll();
+        List<EventDto> eventDtoList = eventService.getAll();
         assertNotEquals("Event collection is empty", eventDtoList.size(), 0);
 
     }

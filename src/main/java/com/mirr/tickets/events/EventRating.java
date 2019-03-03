@@ -1,6 +1,6 @@
 package com.mirr.tickets.events;
 
-public enum RatingEvents {
+public enum EventRating {
     /**
      * @author Oksana_Abramova
      */

@@ -1,10 +1,19 @@
 package com.mirr.tickets.auditoriums;
 
-import java.util.List;
+import java.util.*;
+
 
 interface AuditoriumService {
 
-    List<AuditoriumServiceDto> getAll();
+public static void getPropertyFile() {
 
-    void getByName(String name);
-}
+
+
+    }
+
+
+
+        List<AuditoriumDto> getAll ();
+
+        AuditoriumDto getByName (String name);
+    }
