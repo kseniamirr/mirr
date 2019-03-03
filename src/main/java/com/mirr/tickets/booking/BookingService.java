@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 interface BookingService {
 
-    Price getTicketsPrice(EventServiceDto eventServiceDto, LocalDateTime dateTime, UserDto userDto, AuditoriumServiceDto numberOfSeats);
+    Price getTicketsPrice(String eventName, LocalDateTime dateTime, int userId, AuditoriumServiceDto numberOfSeats);
 
     void getPurchasedTicketsForEvent();
 

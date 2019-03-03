@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class BookingServiceImpl implements BookingService {
     @Override
-    public Price getTicketsPrice(EventServiceDto eventServiceDto, LocalDateTime dateTime, UserDto userDto, AuditoriumServiceDto numberOfSeats) {
+    public Price getTicketsPrice(String eventName, LocalDateTime dateTime, int userId, AuditoriumServiceDto numberOfSeats) {
         return null;
     }
 
