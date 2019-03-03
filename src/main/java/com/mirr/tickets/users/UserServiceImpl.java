@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new UserDto();
         userDto.setId(id);
         UserDto userEqualIdResult = navigableSetUsers.ceiling(userDto);
+        if (userEqualIdResult != null && userEqualIdResult.getId() != id) {
+            return null;
+        }
         return userEqualIdResult;
     }
 

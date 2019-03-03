@@ -5,6 +5,10 @@
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:auditoriums.properties" />
+    </bean>
+
     <bean id="users" class="com.mirr.tickets.users.UserServiceImpl"/>
 
     <bean id="events" class="com.mirr.tickets.events.EventServiceImpl"/>
@@ -13,7 +17,15 @@
 
     <bean id="booking" class="com.mirr.tickets.booking.BookingServiceImpl"/>
 
-    <bean id="auditoriums" class="com.mirr.tickets.auditoriums.AuditoriumServiceImpl"/>
+    <bean id="auditoriums" class="com.mirr.tickets.auditoriums.AuditoriumServiceImpl">
+        <property name="auditoriumNames" value="${auditoriumNames}" />
+        <property name="auditoriumSeatsNumber" value="${numberOfSeats}" />
+        <property name="auditoriumVIPSeats" value="${vipSeats}" />
+
+    </bean>
+
+
+
 
 
 </beans>

@@ -2,9 +2,6 @@ package com.mirr.tickets.events;
 
 import com.mirr.tickets.auditoriums.AuditoriumDto;
 import com.mirr.tickets.users.UserDto;
-import com.mirr.tickets.users.UserService;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.*;
 
@@ -37,6 +34,9 @@ public class EventServiceImpl implements EventService {
         EventDto eventDto = new EventDto();
         eventDto.setId(id);
         EventDto eventIdResult = navigableSetEvents.ceiling(eventDto);
+        if (eventIdResult != null && eventIdResult.getId() != id) {
+            return null;
+        }
         return eventIdResult;
     }
 
