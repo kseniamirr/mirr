@@ -22,11 +22,21 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    /**
+     * * Books tickets in internal system. If user is not
+     *      * <code>null</code> in a ticket then booked tickets are saved with it
+     */
     public void bookTickets(List<TicketDto> tickets) {
 
 
     }
 
+    /**
+     * * Getting all purchased tickets for event on specific air date and time
+     * @param event
+     * @param dateTime
+     * @return list of all purchased tickets
+     */
     @Override
     public List<TicketDto> getPurchasedTicketsForEvent(EventDto event, LocalDateTime dateTime) {
         return ticketService.getTicketsByEvent(event).stream().filter(ticketDto -> ticketDto.getDateTime().equals(dateTime)).collect(Collectors.toList());

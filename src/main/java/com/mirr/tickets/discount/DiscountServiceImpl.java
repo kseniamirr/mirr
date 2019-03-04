@@ -7,9 +7,11 @@ import java.time.LocalDateTime;
 
 public class DiscountServiceImpl implements DiscountService{
 
+      DiscountServiceDto discountServiceDto;
 
     @Override
-    public TotalDiscount getDiscount(UserDto userDto, EventDto eventDto, LocalDateTime dateTime, int numberOfTickets) {
-        return null;
+    public byte getDiscount(UserDto user, EventDto event, LocalDateTime airDateTime, long numberOfTickets) {
+        //discountServiceDto.
+        return 0;
     }
 }
