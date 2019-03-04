@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 public class TicketDto {
+
     private UserDto user;
 
     private EventDto event;

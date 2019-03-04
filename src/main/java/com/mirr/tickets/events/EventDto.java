@@ -18,4 +18,5 @@ public class EventDto {
     double basePrice;
     EventRating eventRating;
     int id;
+
 }

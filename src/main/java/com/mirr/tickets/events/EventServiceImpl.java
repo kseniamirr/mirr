@@ -76,9 +76,19 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public List<EventDto> getAll() {
+    public List<EventDto> getAllEvents() {
         List<EventDto> eventDtoList = new ArrayList<>(navigableSetEvents);
         return eventDtoList;
+    }
+
+    @Override
+    public EventDto getForDateRange(Date from, Date to) {
+        return null;
+    }
+
+    @Override
+    public EventDto getNextEvents(Date to) {
+        return null;
     }
 
     public boolean assignAuditorium(LocalDateTime dateTime, AuditoriumDto auditorium) {
@@ -134,12 +144,5 @@ public class EventServiceImpl implements EventService {
 //            return null;
 //        }
 //
-//        @Override public EventDto getForDateRange (Date from, Date to){
-//            return null;
-//        }
-//
-//        @Override public EventDto getNextEvents (Date to){
-//            return null;
-//        }
 
 

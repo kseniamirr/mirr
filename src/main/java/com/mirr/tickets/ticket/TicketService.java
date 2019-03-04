@@ -19,4 +19,5 @@ public interface TicketService {
     List<TicketDto>getTicketsByUser(UserDto user);
 
     List<TicketDto>getTicketsByEvent(EventDto event);
-}
+
+   }

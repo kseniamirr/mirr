@@ -16,7 +16,7 @@ public interface EventService {
 
     EventDto getEventByName(String name);
 
-    List<EventDto> getAll();
+    List<EventDto> getAllEvents();
 
 
     //EventDto saveEventOccurence(int eventId, AuditoriumDto auditoriumId, Date to);

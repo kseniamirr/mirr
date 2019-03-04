@@ -51,7 +51,7 @@ public class EventsTests {
 
         EventDto event = initEvent();
         eventService.save(event);
-        List<EventDto> eventDtoList = eventService.getAll();
+        List<EventDto> eventDtoList = eventService.getAllEvents();
         assertNotEquals("Event collection is empty", 0, eventDtoList.size());
 
     }
