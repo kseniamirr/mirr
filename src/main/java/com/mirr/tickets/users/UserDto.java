@@ -9,10 +9,10 @@ import java.util.Objects;
 @Setter
 public class UserDto {
 
-    int id;
-    String email;
-    String firsName;
-    String lastName;
+    private int id;
+    private String email;
+    private String firsName;
+    private String lastName;
 
 
     @Override

@@ -58,7 +58,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         AuditoriumDto auditoriumDto = new AuditoriumDto();
         auditoriumDto.setName(name);
         AuditoriumDto auditoriumFounded = auditoriumDtoList.ceiling(auditoriumDto);
-        if (auditoriumFounded != null && auditoriumFounded.getName().equals(name)) {
+        if (auditoriumFounded != null && ! auditoriumFounded.getName().equals(name)) {
             return null;
         }
         return auditoriumFounded;

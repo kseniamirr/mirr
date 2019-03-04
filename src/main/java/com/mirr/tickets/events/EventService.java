@@ -18,6 +18,8 @@ public interface EventService {
 
     List<EventDto> getAllEvents();
 
+    SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate);
+
 
     //EventDto saveEventOccurence(int eventId, AuditoriumDto auditoriumId, Date to);
 

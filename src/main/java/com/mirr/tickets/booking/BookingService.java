@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-interface BookingService {
+public interface BookingService {
 
     public double getTicketsPrice(EventDto event, LocalDateTime dateTime, UserDto user,
                                   Set<Long> seats);

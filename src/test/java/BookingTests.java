@@ -1,3 +1,4 @@
+import com.mirr.tickets.booking.BookingService;
 import com.mirr.tickets.booking.BookingServiceImpl;
 import com.mirr.tickets.events.EventDto;
 import com.mirr.tickets.ticket.TicketDto;
@@ -19,13 +20,21 @@ import static org.junit.Assert.assertEquals;
 public class BookingTests {
 
     @Autowired
-    BookingServiceImpl bookingService;
+    BookingService bookingService;
 
-    @Test
-    public void getAllPurchasedTicketsForEvent() {
+//    @Test
+//    public void getTicketsPrice() {
+//
+//        EventDto eventDto = new EventDto();
+//        List<TicketDto> ticketDtoList = bookingService.getTicketsPrice(eventDto, LocalDateTime.now());
+//        assertEquals(0, ticketDtoList.size());
+//    }
 
-        EventDto eventDto = new EventDto();
-        List<TicketDto> ticketDtoList = bookingService.getPurchasedTicketsForEvent(eventDto, LocalDateTime.now());
-        assertEquals(0, ticketDtoList.size());
-    }
+//    @Test
+//    public void getAllPurchasedTicketsForEvent() {
+//
+//        EventDto eventDto = new EventDto();
+//        List<TicketDto> ticketDtoList = bookingService.getPurchasedTicketsForEvent(eventDto, LocalDateTime.now());
+//        assertEquals(0, ticketDtoList.size());
+//    }
 }

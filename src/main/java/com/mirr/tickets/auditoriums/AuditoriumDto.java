@@ -16,9 +16,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class AuditoriumDto {
 
-    String name;
-    int numberOfSeats;
-    int[] vipSeats;
+    private String name;
+    private int numberOfSeats;
+    private int[] vipSeats;
 
     @Override
     public String toString() {
