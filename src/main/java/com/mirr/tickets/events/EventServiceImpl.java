@@ -2,12 +2,18 @@ package com.mirr.tickets.events;
 
 import com.mirr.tickets.auditoriums.AuditoriumDto;
 import com.mirr.tickets.users.UserDto;
+import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
+
 
 public class EventServiceImpl implements EventService {
 
     private static NavigableSet<EventDto> navigableSetEvents = new TreeSet<>(EventServiceImpl::compareByName);
+    private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
+    private NavigableMap<LocalDateTime, AuditoriumDto> auditoriums = new TreeMap<>();
 
     @Override
     public EventDto save(EventDto eventDto) {
@@ -69,28 +75,71 @@ public class EventServiceImpl implements EventService {
     }
 
 
-
     @Override
     public List<EventDto> getAll() {
         List<EventDto> eventDtoList = new ArrayList<>(navigableSetEvents);
         return eventDtoList;
     }
 
-
-
-
-    @Override
-    public EventDto saveEventOccurence(int eventId, AuditoriumDto auditoriumId, Date to) {
-        return null;
+    public boolean assignAuditorium(LocalDateTime dateTime, AuditoriumDto auditorium) {
+        if (airDates.contains(dateTime)) {
+            auditoriums.put(dateTime, auditorium);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    @Override
-    public EventDto getForDateRange(Date from, Date to) {
-        return null;
+        public boolean removeAuditoriumAssignment (LocalDateTime dateTime){
+            return auditoriums.remove(dateTime) != null;
+        }
+
+        public boolean addAirDateTime (LocalDateTime dateTime){
+            return airDates.add(dateTime);
+        }
+        public boolean addAirDateTime (LocalDateTime dateTime, AuditoriumDto auditorium){
+            boolean result = airDates.add(dateTime);
+            if (result) {
+                auditoriums.put(dateTime, auditorium);
+            }
+            return result;
+        }
+
+        public boolean removeAirDateTime (LocalDateTime dateTime){
+            boolean result = airDates.remove(dateTime);
+            if (result) {
+                auditoriums.remove(dateTime);
+            }
+            return result;
+        }
+
+        public boolean airsOnDateTime (LocalDateTime dateTime){
+            return airDates.stream().anyMatch(dt -> dt.equals(dateTime));
+        }
+
+
+        public boolean airsOnDate (LocalDate date){
+            return airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
+        }
+
+
+        public boolean airsOnDates (LocalDate from, LocalDate to){
+            return airDates.stream().anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
+        }
     }
 
-    @Override
-    public EventDto getNextEvents(Date to) {
-        return null;
-    }
-}
+
+
+//        @Override public EventDto saveEventOccurence ( int eventId, AuditoriumDto auditoriumId, Date to){
+//            return null;
+//        }
+//
+//        @Override public EventDto getForDateRange (Date from, Date to){
+//            return null;
+//        }
+//
+//        @Override public EventDto getNextEvents (Date to){
+//            return null;
+//        }
+
+

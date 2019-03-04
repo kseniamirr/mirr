@@ -1,10 +1,13 @@
 package com.mirr.tickets.users;
 
+import com.mirr.tickets.ticket.TicketDto;
+
 import java.util.*;
 
 public class UserServiceImpl implements UserService {
 
     private static NavigableSet<UserDto> navigableSetUsers = new TreeSet<>(UserServiceImpl::compareById);
+    private NavigableSet<TicketDto> tickets = new TreeSet<>();
 
     @Override
     public UserDto save(UserDto userDto) {

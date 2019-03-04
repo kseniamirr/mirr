@@ -71,4 +71,9 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         if (auditoriumDto1.getName() == null) return -1;
         return auditoriumDto1.getName().compareTo(auditoriumDto2.getName());
     }
+
+    public long countVipSeats(Collection<Long> seats) {
+        Set<Long> vipSeats = Collections.emptySet();
+        return seats.stream().filter(seat -> vipSeats.contains(seat)).count();
+    }
 }

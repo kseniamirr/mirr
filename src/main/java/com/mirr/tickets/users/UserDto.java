@@ -11,6 +11,9 @@ public class UserDto {
 
     int id;
     String email;
+    String firsName;
+    String lastName;
+
 
     @Override
     public boolean equals(Object o) {

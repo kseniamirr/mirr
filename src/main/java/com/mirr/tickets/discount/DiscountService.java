@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 
 interface DiscountService {
 
-    TotalDiscount getDiscount(UserDto userDto, EventDto eventDto, LocalDateTime dateTime, int numberOfTickets );
+    TotalDiscount getDiscount(UserDto userDto, EventDto eventDto, LocalDateTime airDateTime, int numberOfTickets );
 }

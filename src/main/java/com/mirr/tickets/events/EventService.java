@@ -2,6 +2,7 @@ package com.mirr.tickets.events;
 
 import com.mirr.tickets.auditoriums.AuditoriumDto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,14 +14,16 @@ public interface EventService {
 
     EventDto getById(int id);
 
-    EventDto getEventByName(String email);
+    EventDto getEventByName(String name);
 
     List<EventDto> getAll();
 
 
-    EventDto saveEventOccurence(int eventId, AuditoriumDto auditoriumId, Date to);
+    //EventDto saveEventOccurence(int eventId, AuditoriumDto auditoriumId, Date to);
 
     EventDto getForDateRange(Date from, Date to);
 
     EventDto getNextEvents(Date to);
+
+
 }
