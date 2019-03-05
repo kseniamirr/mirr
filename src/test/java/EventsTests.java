@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -40,8 +41,8 @@ public class EventsTests {
     public void getEventIdTest() {
         Event event = initEvent();
         eventService.save(event);
-        Event testEvent = eventService.getById(event.getId());
-       assertEquals("Id is not correct", event.getId(), testEvent.getId());
+        Optional<Event> testEvent = eventService.getById(event.getId());
+       assertEquals("Id is not correct", event.getId(), testEvent.get().getId());
 
     }
 

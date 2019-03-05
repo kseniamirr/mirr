@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
-import static com.mirr.tickets.dao.UserDao.navigableUsers;
-
 public class UserServiceImpl implements UserService {
 
 
@@ -17,7 +15,7 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         if (user.getId() == 0) {
             try {
-                user.setId(navigableUsers.last().getId() + 1);
+                user.setId(userDao.navigableUsers.last().getId() + 1);
             } catch (NoSuchElementException e) {
                 user.setId(0);
             }
@@ -37,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public User getUserById(int id) {
         User user = new User();
         user.setId(id);
-        User userEqualIdResult = navigableUsers.ceiling(user);
+        User userEqualIdResult = userDao.navigableUsers.ceiling(user);
         if (userEqualIdResult != null && userEqualIdResult.getId() != id) {
             return null;
         }
@@ -74,8 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        List<User> userList = new ArrayList<>(navigableUsers);
-        return userList;
+        return userDao.userList;
     }
 
     @Override

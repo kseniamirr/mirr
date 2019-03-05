@@ -11,9 +11,10 @@ public class UserDao implements GenericDao<User> {
 
     public static NavigableSet<User> navigableUsers = new TreeSet<>(UserServiceImpl::compareById);
 
-    List<User> userList = new ArrayList<>(navigableUsers);
+    public List<User> userList = new ArrayList<>(navigableUsers);
 
     public List<User> userSearchList = new ArrayList<>(navigableUsers);
+
 
 
     public UserDao() {
