@@ -1,4 +1,4 @@
-import com.mirr.tickets.events.EventDto;
+import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventService;
 import com.mirr.tickets.events.SeanceDto;
 import org.junit.Test;
@@ -24,53 +24,53 @@ public class EventsTests {
 
     @Test
     public void getNameTest() {
-        EventDto eventDto = initName();
-        eventDto.getName();
-        assertEquals("The name is not correct", "Blue", eventDto.getName());
+        Event event = initName();
+        event.getName();
+        assertEquals("The name is not correct", "Blue", event.getName());
 
     }
 
-    private EventDto initName() {
-        EventDto eventDto = new EventDto();
-        eventDto.setName("Blue");
-        return eventDto;
+    private Event initName() {
+        Event event = new Event();
+        event.setName("Blue");
+        return event;
     }
 
     @Test
     public void getEventIdTest() {
-        EventDto eventDto = initEvent();
-        eventService.save(eventDto);
-        EventDto testEvent = eventService.getById(eventDto.getId());
-       assertEquals("Id is not correct", eventDto.getId(), testEvent.getId());
+        Event event = initEvent();
+        eventService.save(event);
+        Event testEvent = eventService.getById(event.getId());
+       assertEquals("Id is not correct", event.getId(), testEvent.getId());
 
     }
 
-    static EventDto initEvent() {
-        EventDto eventDto = new EventDto();
-        eventDto.setId(0355);
-        eventDto.setName("Vice");
-        eventDto.setBasePrice(15);
-        return eventDto;
+    static Event initEvent() {
+        Event event = new Event();
+        event.setId(0355);
+        event.setName("Vice");
+        event.setBasePrice(15);
+        return event;
     }
 
     @Test
     public void getAllEvents() {
 
-        EventDto event = initEvent();
+        Event event = initEvent();
         eventService.save(event);
-        List<EventDto> eventDtoList = eventService.getAllEvents();
-        assertNotEquals("Event collection is empty", 0, eventDtoList.size());
+        List<Event> eventList = eventService.getAllEvents();
+        assertNotEquals("Event collection is empty", 0, eventList.size());
     }
 
 
     @Test
     public void testSaveSeance() {
-        EventDto eventDto = EventsTests.initEvent();
-        EventDto eventDtoAdded = eventService.save(eventDto);
+        Event event = EventsTests.initEvent();
+        Event eventAdded = eventService.save(event);
 
         LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 
-        SeanceDto seanceDto = eventService.saveSeance(eventDto.getName(), AUDITORIUM_NAME, airDateTime);
+        SeanceDto seanceDto = eventService.saveSeance(event.getName(), AUDITORIUM_NAME, airDateTime);
 
         assertNotEquals("seance id is not filled", 0, seanceDto.getSeanceId());
         assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seanceDto.getAuditoriumName());

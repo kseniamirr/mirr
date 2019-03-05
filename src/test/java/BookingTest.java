@@ -1,18 +1,9 @@
-import com.mirr.tickets.auditoriums.AuditoriumDto;
-import com.mirr.tickets.auditoriums.AuditoriumService;
-import com.mirr.tickets.events.EventDto;
 import com.mirr.tickets.events.EventService;
-import com.mirr.tickets.events.SeanceDto;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -29,8 +20,8 @@ public class BookingTest {
 
 //    @BeforeClass
 //    public void initData() {
-//        EventDto eventDto = EventsTests.initEvent();
-//        EventDto eventDtoAdded = eventService.save(eventDto);
+//        Event eventDto = EventsTests.initEvent();
+//        Event eventDtoAdded = eventService.save(eventDto);
 //
 //        LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 //

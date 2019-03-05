@@ -1,39 +1,43 @@
 package com.mirr.tickets.users;
 
-import com.mirr.tickets.ticket.TicketDto;
+import com.mirr.tickets.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
+import static com.mirr.tickets.dao.UserDao.navigableUsers;
+
 public class UserServiceImpl implements UserService {
 
-    private static NavigableSet<UserDto> navigableSetUsers = new TreeSet<>(UserServiceImpl::compareById);
-    private NavigableSet<TicketDto> tickets = new TreeSet<>();
+
+    @Autowired
+    private UserDao userDao;
 
     @Override
-    public UserDto save(UserDto userDto) {
-        if (userDto.getId() == 0) {
+    public User save(User user) {
+        if (user.getId() == 0) {
             try {
-                userDto.setId(navigableSetUsers.last().getId() + 1);
+                user.setId(navigableUsers.last().getId() + 1);
             } catch (NoSuchElementException e) {
-                userDto.setId(0);
+                user.setId(0);
             }
         }
-        navigableSetUsers.add(userDto);
-        return userDto;
+        userDao.save(user);
+        return user;
     }
 
     @Override
     public void remove(int id) {
-        UserDto userDto = new UserDto();
-        userDto.setId(id);
-        navigableSetUsers.remove(userDto);
+        User user = new User();
+        user.setId(id);
+        userDao.remove(user);
     }
 
     @Override
-    public UserDto getUserById(int id) {
-        UserDto userDto = new UserDto();
-        userDto.setId(id);
-        UserDto userEqualIdResult = navigableSetUsers.ceiling(userDto);
+    public User getUserById(int id) {
+        User user = new User();
+        user.setId(id);
+        User userEqualIdResult = navigableUsers.ceiling(user);
         if (userEqualIdResult != null && userEqualIdResult.getId() != id) {
             return null;
         }
@@ -41,36 +45,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserByEmail(String email) {
-        UserDto userDto = new UserDto();
-        userDto.setEmail(email);
+    public User getUserByEmail(String email) {
+        User user = new User();
+        user.setEmail(email);
 
-        List<UserDto> userSearchList = new ArrayList<>(navigableSetUsers);
-        Collections.sort(userSearchList, UserServiceImpl::compareByEmail);
 
-        int pos = Collections.binarySearch(userSearchList, userDto, UserServiceImpl::compareByEmail);
-        return userSearchList.get(pos);
+        Collections.sort(userDao.userSearchList, UserServiceImpl::compareByEmail);
+
+        int pos = Collections.binarySearch(userDao.userSearchList, user, UserServiceImpl::compareByEmail);
+        return userDao.userSearchList.get(pos);
     }
 
-    private static int compareByEmail(UserDto userDto1, UserDto userDto2) {
-        if (userDto1 == userDto2) return 0;
-        if (userDto1 == null) return -1;
-        if (userDto1.getEmail() == userDto2.getEmail()) return 0;
-        if (userDto1.getEmail() == null) return -1;
-        return userDto1.getEmail().compareTo(userDto2.getEmail());
+    private static int compareByEmail(User user1, User user2) {
+        if (user1 == user2) return 0;
+        if (user1 == null) return -1;
+        if (user1.getEmail() == user2.getEmail()) return 0;
+        if (user1.getEmail() == null) return -1;
+        return user1.getEmail().compareTo(user2.getEmail());
     }
 
-    private static int compareById(UserDto userDto1, UserDto userDto2) {
-        if (userDto1 == userDto2) return -1;
-        if (userDto1 == null) return 0;
-        if (userDto1.getId() == userDto2.getId()) return 0;
-        if (userDto1.getId() < userDto2.getId()) return -1;
+    public static int compareById(User user1, User user2) {
+        if (user1 == user2) return -1;
+        if (user1 == null) return 0;
+        if (user1.getId() == user2.getId()) return 0;
+        if (user1.getId() < user2.getId()) return -1;
         return 1;
     }
 
     @Override
-    public List<UserDto> getAll() {
-        List<UserDto> userDtoList = new ArrayList<>(navigableSetUsers);
-        return userDtoList;
+    public List<User> getAll() {
+        List<User> userList = new ArrayList<>(navigableUsers);
+        return userList;
+    }
+
+    @Override
+    public void update(User user, String[] params) {
+
     }
 }

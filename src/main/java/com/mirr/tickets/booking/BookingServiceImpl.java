@@ -1,9 +1,9 @@
 package com.mirr.tickets.booking;
 
-import com.mirr.tickets.events.EventDto;
-import com.mirr.tickets.ticket.TicketDto;
+import com.mirr.tickets.events.Event;
+import com.mirr.tickets.ticket.Ticket;
 import com.mirr.tickets.ticket.TicketService;
-import com.mirr.tickets.users.UserDto;
+import com.mirr.tickets.users.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +16,8 @@ public class BookingServiceImpl implements BookingService {
     TicketService ticketService;
 
     @Override
-    public double getTicketsPrice(EventDto event, LocalDateTime dateTime, UserDto user, Set<Long> seats) {
-        return ticketService.getTicketsByEvent(event).stream().filter(ticketDto -> ticketDto.getDateTime().equals(dateTime)).filter(ticketDto -> ticketDto.getUser().equals(user)).filter(ticketDto -> seats.contains(ticketDto.getSeat())).mapToDouble(ticketDto -> ticketDto.getEvent().getBasePrice()).sum();
+    public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats) {
+        return ticketService.getTicketsByEvent(event).stream().filter(ticket -> ticket.getDateTime().equals(dateTime)).filter(ticket -> ticket.getUser().equals(user)).filter(ticket -> seats.contains(ticket.getSeat())).mapToDouble(ticket -> ticket.getEvent().getBasePrice()).sum();
 
     }
 
@@ -26,7 +26,7 @@ public class BookingServiceImpl implements BookingService {
      * * Books tickets in internal system. If user is not
      *      * <code>null</code> in a ticket then booked tickets are saved with it
      */
-    public void bookTickets(List<TicketDto> tickets) {
+    public void bookTickets(List<Ticket> tickets) {
 
 
     }
@@ -38,8 +38,8 @@ public class BookingServiceImpl implements BookingService {
      * @return list of all purchased tickets
      */
     @Override
-    public List<TicketDto> getPurchasedTicketsForEvent(EventDto event, LocalDateTime dateTime) {
-        return ticketService.getTicketsByEvent(event).stream().filter(ticketDto -> ticketDto.getDateTime().equals(dateTime)).collect(Collectors.toList());
+    public List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
+        return ticketService.getTicketsByEvent(event).stream().filter(ticket -> ticket.getDateTime().equals(dateTime)).collect(Collectors.toList());
     }
 }
 

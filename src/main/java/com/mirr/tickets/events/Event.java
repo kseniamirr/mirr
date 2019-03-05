@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class EventDto {
+public class Event {
 
     private String name;
     private double basePrice;

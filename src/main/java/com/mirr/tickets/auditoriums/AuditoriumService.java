@@ -10,7 +10,7 @@ public interface AuditoriumService {
     }
 
 
-    public Set<AuditoriumDto> getAll();
+    public Set<Auditorium> getAll();
 
-    public AuditoriumDto getByName(String name);
+    public Auditorium getByName(String name);
 }

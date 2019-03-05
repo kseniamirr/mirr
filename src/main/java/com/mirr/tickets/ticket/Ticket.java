@@ -1,7 +1,7 @@
 package com.mirr.tickets.ticket;
 
-import com.mirr.tickets.events.EventDto;
-import com.mirr.tickets.users.UserDto;
+import com.mirr.tickets.events.Event;
+import com.mirr.tickets.users.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-public class TicketDto {
+public class Ticket {
 
-    private UserDto user;
+    private User user;
 
-    private EventDto event;
+    private Event event;
 
     private LocalDateTime dateTime;
 

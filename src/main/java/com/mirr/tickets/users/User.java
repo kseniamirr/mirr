@@ -1,5 +1,6 @@
 package com.mirr.tickets.users;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,20 +8,25 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class UserDto {
+@AllArgsConstructor
+public class User {
 
     private int id;
     private String email;
     private String firsName;
     private String lastName;
 
+    public User() {
+
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDto userDto = (UserDto) o;
-        return id == userDto.id;
+        User user = (User) o;
+        return id == user.id;
     }
 
     @Override

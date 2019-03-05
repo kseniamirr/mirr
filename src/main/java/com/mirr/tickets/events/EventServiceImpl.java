@@ -1,9 +1,11 @@
 package com.mirr.tickets.events;
 
-import com.mirr.tickets.auditoriums.AuditoriumDto;
+import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.auditoriums.AuditoriumService;
-import com.mirr.tickets.users.UserDto;
+import com.mirr.tickets.dao.EventDao;
+import com.mirr.tickets.users.User;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,35 +17,36 @@ public class EventServiceImpl implements EventService {
     @Setter
     private AuditoriumService auditoriumService;
 
-    private static NavigableSet<EventDto> eventsSet = new TreeSet<>(EventServiceImpl::compareByName);
 
-    private static NavigableSet<SeanceDto> seanceDtoSet = new TreeSet<>(EventServiceImpl::compareByEventAuditoriumDate);
+    @Autowired
+    EventDao eventDao;
+
 
     public SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
-        EventDto eventDto = getEventByName(eventName);
-        if (eventDto == null) {
+        Event event = getEventByName(eventName);
+        if (event == null) {
             throw new IllegalArgumentException("There is no such event is announced");
         }
 
-        AuditoriumDto auditoriumDto = auditoriumService.getByName(auditoriumName);
-        if (auditoriumDto == null) {
+        Auditorium auditorium = auditoriumService.getByName(auditoriumName);
+        if (auditorium == null) {
             throw new IllegalArgumentException("There is no such auditorium");
         }
 
         int seanceId;
         try {
-            seanceId = seanceDtoSet.last().getSeanceId() + 1;
+            seanceId = eventDao.seanceDtoSet.last().getSeanceId() + 1;
         } catch (NoSuchElementException e) {
             seanceId = 1;
         }
 
-        SeanceDto seanceDto = new SeanceDto(seanceId, eventDto.getId(), auditoriumName, airDate);
+        SeanceDto seanceDto = new SeanceDto(seanceId, event.getId(), auditoriumName, airDate);
         seanceDto.setSeanceId(seanceId);
-        seanceDtoSet.add(seanceDto);
+        eventDao.seanceDtoSet.add(seanceDto);
         return seanceDto;
     }
 
-    private static int compareByEventAuditoriumDate(SeanceDto seanceDto1, SeanceDto seanceDto2) {
+    public static int compareByEventAuditoriumDate(SeanceDto seanceDto1, SeanceDto seanceDto2) {
         if (seanceDto1 == seanceDto2) return 0;
         if (seanceDto1 == null) return -1;
         if (seanceDto1.getEventId() == seanceDto2.getEventId()) {
@@ -65,89 +68,90 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public EventDto save(EventDto eventDto) {
-        if (eventDto.getName() == null) {
-            try {
-                eventDto.setName(eventsSet.last().getName() + 1);
-            } catch (NoSuchElementException e) {
-                eventDto.setName(null);
-            }
-        }
-        eventsSet.add(eventDto);
-        return eventDto;
+    public Event save(Event event) {
+        eventDao.save(event);
+        return event;
     }
 
     @Override
     public void remove(int id) {
-        EventDto eventDto = new EventDto();
-        eventDto.setId(id);
-        eventsSet.remove(id);
+        Event event = new Event();
+        event.setId(id);
+        eventDao.remove(id);
     }
 
     @Override
-    public EventDto getById(int id) {
-        EventDto eventDto = new EventDto();
-        eventDto.setId(id);
-        EventDto eventIdResult = eventsSet.ceiling(eventDto);
-        if (eventIdResult != null && eventIdResult.getId() != id) {
-            return null;
+    public Optional<Event> getById(int id) {
+        Optional<Event> eventById = eventDao.eventList.stream().filter(event -> event.getId() == id).findFirst();
+        {
+            if (eventById.isPresent()) ;
         }
-        return eventIdResult;
+        return eventById;
     }
+
+//    @Override
+//    public Event getById(int id) {
+//        Event event = new Event();
+//        event.setId(id);
+//        Event eventIdResult = eventsSet.ceiling(event);
+//        if (eventIdResult != null && eventIdResult.getId() != id) {
+//            return null;
+//        }
+//        return eventIdResult;
+//    }
 
     @Override
-    public EventDto getEventByName(String name) {
-        EventDto eventDto = new EventDto();
-        eventDto.setName(name);
+    public Event getEventByName(String name) {
+        Event event = new Event();
+        event.setName(name);
 
-        List<EventDto> eventDtoList = new ArrayList<>(eventsSet);
-        Collections.sort(eventDtoList, EventServiceImpl::compareByName);
 
-        int pos = Collections.binarySearch(eventDtoList, eventDto, EventServiceImpl::compareByName);
-        return eventDtoList.get(pos);
+        Collections.sort(eventDao.eventList, EventServiceImpl::compareByName);
+
+        int pos = Collections.binarySearch(eventDao.eventList, event, EventServiceImpl::compareByName);
+        return eventDao.eventList.get(pos);
     }
 
-    private static int compareByName(EventDto eventDto1, EventDto eventDto2) {
-        if (eventDto1 == eventDto2) return 0;
-        if (eventDto1 == null) return -1;
-        if (eventDto1.getName() == eventDto2.getName()) return 0;
-        if (eventDto1.getName() == null) return -1;
-        return eventDto1.getName().compareTo(eventDto2.getName());
+    public static int compareByName(Event event1, Event event2) {
+        if (event1 == event2) return 0;
+        if (event1 == null) return -1;
+        if (event1.getName() == event2.getName()) return 0;
+        if (event1.getName() == null) return -1;
+        return event1.getName().compareTo(event2.getName());
     }
 
-    private static int compareById(UserDto userDto1, UserDto userDto2) {
-        if (userDto1 == userDto2) return -1;
-        if (userDto1 == null) return 0;
-        if (userDto1.getId() == userDto2.getId()) return 0;
-        if (userDto1.getId() < userDto2.getId()) return -1;
+    private static int compareById(User user1, User user2) {
+        if (user1 == user2) return -1;
+        if (user1 == null) return 0;
+        if (user1.getId() == user2.getId()) return 0;
+        if (user1.getId() < user2.getId()) return -1;
         return 1;
     }
 
 
     @Override
-    public List<EventDto> getAllEvents() {
-        List<EventDto> eventDtoList = new ArrayList<>(eventsSet);
-        return eventDtoList;
+    public List<Event> getAllEvents() {
+        return eventDao.eventList;
     }
 
     @Override
-    public EventDto getForDateRange(Date from, Date to) {
+    public Event getForDateRange(Date from, Date to) {
         return null;
     }
 
     @Override
-    public EventDto getNextEvents(Date to) {
+    public Event getNextEvents(Date to) {
         return null;
     }
 
-//    to remove
+    @Override
+    public void update(Event event, String[] params) {
 
-    private NavigableSet<LocalDateTime> airDates = new TreeSet<>();
-    private NavigableMap<LocalDateTime, AuditoriumDto> auditoriums = new TreeMap<>();
+    }
 
-    public boolean assignAuditorium(LocalDateTime dateTime, AuditoriumDto auditorium) {
-        if (airDates.contains(dateTime)) {
-            auditoriums.put(dateTime, auditorium);
+    public boolean assignAuditorium(LocalDateTime dateTime, Auditorium auditorium) {
+        if (eventDao.airDates.contains(dateTime)) {
+            eventDao.auditoriums.put(dateTime, auditorium);
             return true;
         } else {
             return false;
@@ -155,48 +159,45 @@ public class EventServiceImpl implements EventService {
     }
 
     public boolean removeAuditoriumAssignment(LocalDateTime dateTime) {
-        return auditoriums.remove(dateTime) != null;
+        return eventDao.auditoriums.remove(dateTime) != null;
     }
 
     public boolean addAirDateTime(LocalDateTime dateTime) {
-        return airDates.add(dateTime);
+        return eventDao.airDates.add(dateTime);
     }
 
-    public boolean addAirDateTime(LocalDateTime dateTime, AuditoriumDto auditorium) {
-        boolean result = airDates.add(dateTime);
+    public boolean addAirDateTime(LocalDateTime dateTime, Auditorium auditorium) {
+        boolean result = eventDao.airDates.add(dateTime);
         if (result) {
-            auditoriums.put(dateTime, auditorium);
+            eventDao.auditoriums.put(dateTime, auditorium);
         }
         return result;
     }
 
     public boolean removeAirDateTime(LocalDateTime dateTime) {
-        boolean result = airDates.remove(dateTime);
+        boolean result = eventDao.airDates.remove(dateTime);
         if (result) {
-            auditoriums.remove(dateTime);
+            eventDao.auditoriums.remove(dateTime);
         }
         return result;
     }
 
     public boolean airsOnDateTime(LocalDateTime dateTime) {
-        return airDates.stream().anyMatch(dt -> dt.equals(dateTime));
+        return eventDao.airDates.stream().anyMatch(dt -> dt.equals(dateTime));
     }
 
 
     public boolean airsOnDate(LocalDate date) {
-        return airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
+        return eventDao.airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
     }
 
 
     public boolean airsOnDates(LocalDate from, LocalDate to) {
-        return airDates.stream().anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
+        return eventDao.airDates.stream().anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
     }
+
 }
 
 
-//        @Override public EventDto saveEventOccurence ( int eventId, AuditoriumDto auditoriumId, Date to){
-//            return null;
-//        }
-//
 
 

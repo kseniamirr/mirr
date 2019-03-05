@@ -1,8 +1,7 @@
 package com.mirr.tickets.ticket;
 
-import com.mirr.tickets.events.EventDto;
-import com.mirr.tickets.events.EventService;
-import com.mirr.tickets.users.UserDto;
+import com.mirr.tickets.events.Event;
+import com.mirr.tickets.users.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,15 +13,15 @@ public class TicketServiceImpl implements TicketService {
     TicketService ticketService;
 
     @Override
-    public UserDto getUser() {
+    public User getUser() {
         return null;
     }
 
     @Override
-    public EventDto getEvent() {
-        EventDto eventDto = new EventDto();
-        eventDto.getName();
-        return eventDto;
+    public Event getEvent() {
+        Event event = new Event();
+        event.getName();
+        return event;
     }
 
     @Override
@@ -36,14 +35,14 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<TicketDto> getTicketsByUser(UserDto user) {
+    public List<Ticket> getTicketsByUser(User user) {
         return null;
     }
 
     @Override
-    public List<TicketDto> getTicketsByEvent(EventDto event) {
-        List<TicketDto> ticketDtoList = new ArrayList<>();
-        return ticketDtoList.stream().filter(ticketDto -> ticketDto.getEvent().equals(event)).collect(Collectors.toList());
+    public List<Ticket> getTicketsByEvent(Event event) {
+        List<Ticket> ticketList = new ArrayList<>();
+        return ticketList.stream().filter(ticket -> ticket.getEvent().equals(event)).collect(Collectors.toList());
 
     }
 }

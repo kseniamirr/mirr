@@ -9,7 +9,7 @@
         <property name="locations" value="classpath:auditoriums.properties" />
     </bean>
 
-    <bean id="users" class="com.mirr.tickets.users.UserServiceImpl"/>
+    <bean id="users" class="com.mirr.tickets.dao.UserServiceImpl"/>
 
     <bean id="events" class="com.mirr.tickets.events.EventServiceImpl">
         <property name="auditoriumService" ref="auditoriums" />

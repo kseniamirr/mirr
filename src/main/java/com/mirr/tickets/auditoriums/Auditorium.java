@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuditoriumDto {
+public class Auditorium {
 
     private String name;
     private int numberOfSeats;
@@ -22,7 +22,7 @@ public class AuditoriumDto {
 
     @Override
     public String toString() {
-        return "AuditoriumDto{" +
+        return "Auditorium{" +
                 "name='" + name + '\'' +
                 ", numberOfSeats=" + numberOfSeats +
                 ", vipSeats=" + Arrays.toString(vipSeats) +

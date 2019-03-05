@@ -1,31 +1,27 @@
 package com.mirr.tickets.events;
 
-import com.mirr.tickets.auditoriums.AuditoriumDto;
-
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface EventService {
 
-    EventDto save(EventDto eventDto);
+    Event save(Event event);
 
     void remove(int id);
 
-    EventDto getById(int id);
+    Optional<Event> getById(int id);
 
-    EventDto getEventByName(String name);
+    Event getEventByName(String name);
 
-    List<EventDto> getAllEvents();
+    List<Event> getAllEvents();
 
     SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate);
 
+    Event getForDateRange(Date from, Date to);
 
-    //EventDto saveEventOccurence(int eventId, AuditoriumDto auditoriumId, Date to);
+    Event getNextEvents(Date to);
 
-    EventDto getForDateRange(Date from, Date to);
-
-    EventDto getNextEvents(Date to);
-
-
+    void update(Event event,String [] params);
 }

@@ -1,4 +1,4 @@
-import com.mirr.tickets.auditoriums.AuditoriumDto;
+import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.auditoriums.AuditoriumService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,9 +20,9 @@ public class AuditoriumTests {
 
     @Test
     public void getAllTest() {
-        Set<AuditoriumDto> auditoriumDtoSet = auditoriumService.getAll();
-        auditoriumDtoSet.stream().forEach(auditoriumDto -> System.out.println("auditorium: " + auditoriumDto));
-        assertTrue("size is not correct", auditoriumDtoSet.size() > 1);
+        Set<Auditorium> auditoriumSet = auditoriumService.getAll();
+        auditoriumSet.stream().forEach(auditoriumDto -> System.out.println("auditorium: " + auditoriumDto));
+        assertTrue("size is not correct", auditoriumSet.size() > 1);
 
     }
 

@@ -1,15 +1,16 @@
 package com.mirr.tickets.auditoriums;
 
-import com.mirr.tickets.events.EventDto;
+import com.mirr.tickets.dao.AuditoriumDao;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
 
 public class AuditoriumServiceImpl implements AuditoriumService {
 
-    private static NavigableSet<AuditoriumDto> auditoriumDtoList = new TreeSet<>(AuditoriumServiceImpl::compareByName);
+    @Autowired
+    AuditoriumDao auditoriumDao;
 
     @Setter
     private String auditoriumNames;
@@ -29,7 +30,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         for (int i = 0; i < auditoriumNamesArray.length; i++) {
             String auditorium = auditoriumNamesArray[i];
             int auditoriumSeatsNumber = 0;
-            int[] auditoriumVIPSeats = new int[] {};
+            int[] auditoriumVIPSeats = new int[]{};
             if (auditoriumSeatsNumberArray.length > i) {
                 auditoriumSeatsNumber = Integer.valueOf(auditoriumSeatsNumberArray[i]);
             }
@@ -42,34 +43,34 @@ public class AuditoriumServiceImpl implements AuditoriumService {
                     auditoriumVIPSeats[el++] = Integer.valueOf(vipSeat).intValue();
                 }
             }
-            AuditoriumDto auditoriumDto = new AuditoriumDto(auditorium, auditoriumSeatsNumber, auditoriumVIPSeats);
-            auditoriumDtoList.add(auditoriumDto);
+            Auditorium auditoriumDto = new Auditorium(auditorium, auditoriumSeatsNumber, auditoriumVIPSeats);
+            auditoriumDao.auditoriumList.add(auditoriumDto);
         }
 
     }
 
     @Override
-    public Set<AuditoriumDto> getAll() {
-        return auditoriumDtoList;
+    public Set<Auditorium> getAll() {
+        return auditoriumDao.auditoriumList;
     }
 
     @Override
-    public AuditoriumDto getByName(String name) {
-        AuditoriumDto auditoriumDto = new AuditoriumDto();
-        auditoriumDto.setName(name);
-        AuditoriumDto auditoriumFounded = auditoriumDtoList.ceiling(auditoriumDto);
-        if (auditoriumFounded != null && ! auditoriumFounded.getName().equals(name)) {
+    public Auditorium getByName(String name) {
+        Auditorium auditorium = new Auditorium();
+        auditorium.setName(name);
+        Auditorium auditoriumFounded = auditoriumDao.auditoriumList.ceiling(auditorium);
+        if (auditoriumFounded != null && !auditoriumFounded.getName().equals(name)) {
             return null;
         }
         return auditoriumFounded;
     }
 
-    private static int compareByName(AuditoriumDto auditoriumDto1, AuditoriumDto auditoriumDto2) {
-        if (auditoriumDto1 == auditoriumDto2) return 0;
-        if (auditoriumDto1 == null) return -1;
-        if (auditoriumDto1.getName() == auditoriumDto2.getName()) return 0;
-        if (auditoriumDto1.getName() == null) return -1;
-        return auditoriumDto1.getName().compareTo(auditoriumDto2.getName());
+    public static int compareByName(Auditorium auditorium1, Auditorium auditorium2) {
+        if (auditorium1 == auditorium2) return 0;
+        if (auditorium1 == null) return -1;
+        if (auditorium1.getName() == auditorium2.getName()) return 0;
+        if (auditorium1.getName() == null) return -1;
+        return auditorium1.getName().compareTo(auditorium2.getName());
     }
 
     public long countVipSeats(Collection<Long> seats) {
