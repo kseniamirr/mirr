@@ -2,12 +2,14 @@ package com.mirr.tickets.dao;
 
 import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.auditoriums.AuditoriumServiceImpl;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.Optional;
 import java.util.TreeSet;
 
+@Setter
 public class AuditoriumDao implements  GenericDao<Auditorium> {
 
     public static NavigableSet<Auditorium> auditoriumList = new TreeSet<>(AuditoriumServiceImpl::compareByName);

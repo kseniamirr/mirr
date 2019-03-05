@@ -4,10 +4,12 @@ import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventServiceImpl;
 import com.mirr.tickets.events.SeanceDto;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
+@Setter
 public class EventDao implements GenericDao<Event>{
 
     private NavigableSet<Event> eventsSet = new TreeSet<>(EventServiceImpl::compareByName);

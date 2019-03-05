@@ -1,13 +1,16 @@
 package com.mirr.tickets.dao;
 
-import com.mirr.tickets.events.Event;
 import com.mirr.tickets.users.User;
 import com.mirr.tickets.users.UserServiceImpl;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
+@Setter
+@Getter
 public class UserDao implements GenericDao<User> {
-
 
     public static NavigableSet<User> navigableUsers = new TreeSet<>(UserServiceImpl::compareById);
 
