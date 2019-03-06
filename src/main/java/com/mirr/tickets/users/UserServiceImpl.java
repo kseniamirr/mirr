@@ -1,10 +1,11 @@
 package com.mirr.tickets.users;
 
 import com.mirr.tickets.dao.UserDao;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
-
+@Setter
 public class UserServiceImpl implements UserService {
 
 

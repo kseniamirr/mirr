@@ -14,7 +14,7 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-Spring.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class UsersTest {
 
 

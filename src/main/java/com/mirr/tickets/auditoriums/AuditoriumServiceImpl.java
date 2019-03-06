@@ -1,53 +1,48 @@
 package com.mirr.tickets.auditoriums;
 
+
 import com.mirr.tickets.dao.AuditoriumDao;
-import lombok.Setter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
+
 
 public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Autowired
     AuditoriumDao auditoriumDao;
 
-    @Setter
-    private String auditoriumNames;
+//    @Autowired
+//    DBProperties dbProperties;
 
-    @Setter
-    private String auditoriumSeatsNumber;
-
-    @Setter
-    private String auditoriumVIPSeats;
-
-    @PostConstruct
-    public void postConstruct() {
-        String[] auditoriumNamesArray = auditoriumNames.split(";");
-        String[] auditoriumSeatsNumberArray = auditoriumSeatsNumber.split(";");
-        String[] auditoriumVIPSeatsArray = auditoriumVIPSeats.split(";");
-
-        for (int i = 0; i < auditoriumNamesArray.length; i++) {
-            String auditorium = auditoriumNamesArray[i];
-            int auditoriumSeatsNumber = 0;
-            int[] auditoriumVIPSeats = new int[]{};
-            if (auditoriumSeatsNumberArray.length > i) {
-                auditoriumSeatsNumber = Integer.valueOf(auditoriumSeatsNumberArray[i]);
-            }
-            if (auditoriumVIPSeatsArray.length > i) {
-                String auditoriumVIPSeatsStr = auditoriumVIPSeatsArray[i];
-                String[] auditoriumVIPSeatsArr = auditoriumVIPSeatsStr.split(",");
-                auditoriumVIPSeats = new int[auditoriumVIPSeatsArr.length];
-                int el = 0;
-                for (String vipSeat : auditoriumVIPSeatsArr) {
-                    auditoriumVIPSeats[el++] = Integer.valueOf(vipSeat).intValue();
-                }
-            }
-            Auditorium auditoriumDto = new Auditorium(auditorium, auditoriumSeatsNumber, auditoriumVIPSeats);
-            auditoriumDao.auditoriumList.add(auditoriumDto);
-        }
-
-    }
+//    @PostConstruct
+//    public void postConstruct() {
+//        String[] auditoriumNamesArray = dbProperties.auditoriumNames.split(";");
+//        String[] auditoriumSeatsNumberArray = dbProperties.auditoriumSeatsNumber.split(";");
+//        String[] auditoriumVIPSeatsArray = dbProperties.auditoriumVIPSeats.split(";");
+//
+//        for (int i = 0; i < auditoriumNamesArray.length; i++) {
+//            String auditorium = auditoriumNamesArray[i];
+//            int auditoriumSeatsNumber = 0;
+//            int[] auditoriumVIPSeats = new int[]{};
+//            if (auditoriumSeatsNumberArray.length > i) {
+//                auditoriumSeatsNumber = Integer.valueOf(auditoriumSeatsNumberArray[i]);
+//            }
+//            if (auditoriumVIPSeatsArray.length > i) {
+//                String auditoriumVIPSeatsStr = auditoriumVIPSeatsArray[i];
+//                String[] auditoriumVIPSeatsArr = auditoriumVIPSeatsStr.split(",");
+//                auditoriumVIPSeats = new int[auditoriumVIPSeatsArr.length];
+//                int el = 0;
+//                for (String vipSeat : auditoriumVIPSeatsArr) {
+//                    auditoriumVIPSeats[el++] = Integer.valueOf(vipSeat).intValue();
+//                }
+//            }
+//            Auditorium auditoriumDto = new Auditorium(auditorium, auditoriumSeatsNumber, auditoriumVIPSeats);
+//            auditoriumDao.auditoriumList.add(auditoriumDto);
+//        }
+//
+//    }
 
     @Override
     public Set<Auditorium> getAll() {

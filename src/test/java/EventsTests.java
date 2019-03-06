@@ -15,7 +15,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-Spring.xml"})
+//@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class EventsTests {
 
     private final String AUDITORIUM_NAME = "White";
