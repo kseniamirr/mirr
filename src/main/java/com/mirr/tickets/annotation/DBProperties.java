@@ -6,13 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import java.util.List;
-
 
 @Configuration
 @PropertySource("auditoriums.properties")
 @Getter
-@Setter
 public class DBProperties {
 
 
@@ -24,6 +21,6 @@ public class DBProperties {
 
 
     @Value("${db.vipSeats}")
-    private List<String> auditoriumVIPSeats;
+    private String auditoriumVIPSeats;
 
 }

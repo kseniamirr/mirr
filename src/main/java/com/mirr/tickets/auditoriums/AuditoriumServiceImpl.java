@@ -20,9 +20,9 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @PostConstruct
     public void postConstruct() {
-        String[] auditoriumNamesArray = dbProperties.auditoriumNames.split(";");
-        String[] auditoriumSeatsNumberArray = dbProperties.auditoriumSeatsNumber.split(";");
-        String[] auditoriumVIPSeatsArray = dbProperties.auditoriumVIPSeats.split(";");
+        String[] auditoriumNamesArray = dbProperties.getAuditoriumNames().split(";");
+        String[] auditoriumSeatsNumberArray = dbProperties.getAuditoriumSeatsNumber().split(";");
+        String[] auditoriumVIPSeatsArray = dbProperties.getAuditoriumVIPSeats().split(";");
 
         for (int i = 0; i < auditoriumNamesArray.length; i++) {
             String auditorium = auditoriumNamesArray[i];

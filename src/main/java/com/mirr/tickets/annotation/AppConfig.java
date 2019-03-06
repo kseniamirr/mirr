@@ -9,13 +9,17 @@ import com.mirr.tickets.discount.DiscountServiceImpl;
 import com.mirr.tickets.events.EventServiceImpl;
 import com.mirr.tickets.users.UserServiceImpl;
 
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 
 
 @Configuration
+@ComponentScan
 public class AppConfig {
 
 
@@ -49,6 +53,7 @@ public class AppConfig {
         return new EventDao();
     }
 
+
     @Bean
     public AuditoriumDao auditoriumDao() {
         return new AuditoriumDao();
@@ -59,11 +64,4 @@ public class AppConfig {
         return new AuditoriumServiceImpl();
     }
 
-    //    @Bean
-//    public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-//        PropertyPlaceholderConfigurer propertyPlaceholderConfigurer = new PropertyPlaceholderConfigurer();
-//        propertyPlaceholderConfigurer.setLocation(new ClassPathResource("auditoriums.properties"));
-//        return propertyPlaceholderConfigurer;
-//    }
-//
 }
