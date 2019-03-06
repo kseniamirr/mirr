@@ -1,5 +1,7 @@
+import com.mirr.tickets.annotation.AppConfig;
 import com.mirr.tickets.users.User;
 import com.mirr.tickets.users.UserService;
+import com.mirr.tickets.users.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,12 +16,12 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(classes = {AppConfig.class})
 public class UsersTest {
 
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     private User testUser1;
 

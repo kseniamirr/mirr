@@ -16,7 +16,6 @@ import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration
-@PropertySource("classpath:auditoriums.properties")
 public class AppConfig {
 
 

@@ -1,32 +1,32 @@
 package com.mirr.tickets.annotation;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.List;
 
 @Configuration
-@PropertySource("classpath:db.auditoriums.properties")
-@ComponentScan
+@PropertySource("auditoriums.properties")
+@Getter
+@Setter
 public class DBProperties {
 
 
     @Value("${db.auditoriumNames}")
-    public String auditoriumNames;
+    private String auditoriumNames;
 
     @Value("${db.numberOfSeats}")
-    public String auditoriumSeatsNumber;
+    private String auditoriumSeatsNumber;
 
 
     @Value("${db.vipSeats}")
-    public List<String> auditoriumVIPSeats;
+    private List<String> auditoriumVIPSeats;
 
-    @Bean
-    public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        return new PropertyPlaceholderConfigurer();
-    }
+//    @Bean
+//    public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
+//        return new PropertyPlaceholderConfigurer();
+//    }
 }
