@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import java.util.List;
 
+
 @Configuration
 @PropertySource("auditoriums.properties")
 @Getter
@@ -25,8 +26,4 @@ public class DBProperties {
     @Value("${db.vipSeats}")
     private List<String> auditoriumVIPSeats;
 
-//    @Bean
-//    public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-//        return new PropertyPlaceholderConfigurer();
-//    }
 }
