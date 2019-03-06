@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 
 import java.util.List;
 
-
 @Configuration
 @PropertySource("classpath:db.auditoriums.properties")
 @ComponentScan
