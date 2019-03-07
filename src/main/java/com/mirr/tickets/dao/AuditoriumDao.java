@@ -2,6 +2,7 @@ package com.mirr.tickets.dao;
 
 import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.auditoriums.AuditoriumServiceImpl;
+import com.mirr.tickets.events.Event;
 import lombok.Setter;
 
 import java.util.List;
@@ -37,5 +38,11 @@ public class AuditoriumDao implements  GenericDao<Auditorium> {
     @Override
     public void update(Auditorium auditorium, String[] params) {
 
+    }
+
+    @Override
+    public Event getName() {
+
+        return null;
     }
 }

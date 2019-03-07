@@ -71,4 +71,13 @@ public class EventDao implements GenericDao<Event>{
     public void update(Event event, String[] params) {
 
     }
+
+    @Override
+    public Event getName() {
+        Event event = new Event();
+        event.getName();
+        return event;
+    }
+
+
 }

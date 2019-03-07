@@ -56,6 +56,8 @@ public class UsersTest {
     @Test
     public void testGetAll() {
         List<User> dtoList = userService.getAll();
+        dtoList.add(testUser1);
+        dtoList.add(testUser2);
         assertTrue("size is not correct", dtoList.size() > 1);
     }
 

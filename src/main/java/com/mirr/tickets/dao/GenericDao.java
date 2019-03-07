@@ -1,9 +1,11 @@
 package com.mirr.tickets.dao;
 
+import com.mirr.tickets.events.Event;
+
 import java.util.List;
 import java.util.Optional;
 
-interface GenericDao<T> {
+public interface GenericDao<T> {
 
     void save(T t);
 
@@ -14,4 +16,6 @@ interface GenericDao<T> {
     Optional<T> get(T t);
 
     void update(T t, String[] params);
+
+    Event getName();
 }

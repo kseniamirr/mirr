@@ -1,10 +1,10 @@
 package com.mirr.tickets.dao;
 
+import com.mirr.tickets.events.Event;
 import com.mirr.tickets.users.User;
 import com.mirr.tickets.users.UserServiceImpl;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
@@ -53,5 +53,11 @@ public class UserDao implements GenericDao<User> {
 
         navigableUsers.add(user);
 
+    }
+
+    @Override
+    public Event getName() {
+
+        return null;
     }
 }

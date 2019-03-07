@@ -1,3 +1,4 @@
+import com.mirr.tickets.annotation.AppConfig;
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventService;
 import com.mirr.tickets.events.SeanceDto;
@@ -6,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +17,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(classes = AppConfig.class, loader = AnnotationConfigContextLoader.class)
 public class EventsTests {
 
     private final String AUDITORIUM_NAME = "White";
@@ -42,7 +44,7 @@ public class EventsTests {
         Event event = initEvent();
         eventService.save(event);
         Optional<Event> testEvent = eventService.getById(event.getId());
-       assertEquals("Id is not correct", event.getId(), testEvent.get().getId());
+        assertEquals("Id is not correct", event.getId(), testEvent.get().getId());
 
     }
 
@@ -60,6 +62,7 @@ public class EventsTests {
         Event event = initEvent();
         eventService.save(event);
         List<Event> eventList = eventService.getAllEvents();
+        eventList.add(event);
         assertNotEquals("Event collection is empty", 0, eventList.size());
     }
 

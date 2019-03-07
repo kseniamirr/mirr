@@ -1,5 +1,6 @@
 package com.mirr.tickets.annotation;
 
+import com.mirr.tickets.aspect.EventManager;
 import com.mirr.tickets.auditoriums.AuditoriumServiceImpl;
 import com.mirr.tickets.booking.BookingServiceImpl;
 import com.mirr.tickets.dao.AuditoriumDao;
@@ -9,6 +10,7 @@ import com.mirr.tickets.discount.DiscountServiceImpl;
 import com.mirr.tickets.events.EventServiceImpl;
 import com.mirr.tickets.users.UserServiceImpl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 
@@ -64,4 +66,9 @@ public class AppConfig {
         return new AuditoriumServiceImpl();
     }
 
+    @Bean
+    public EventManager eventManager() {
+        return new EventManager();
+    }
 }
+
