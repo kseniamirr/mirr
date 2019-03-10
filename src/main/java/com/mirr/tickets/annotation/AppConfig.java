@@ -66,9 +66,5 @@ public class AppConfig {
         return new AuditoriumServiceImpl();
     }
 
-    @Bean
-    public EventManager eventManager() {
-        return new EventManager();
-    }
 }
 

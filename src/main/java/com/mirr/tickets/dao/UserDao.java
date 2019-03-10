@@ -1,8 +1,6 @@
 package com.mirr.tickets.dao;
 
-import com.mirr.tickets.events.Event;
 import com.mirr.tickets.users.User;
-import com.mirr.tickets.users.UserServiceImpl;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +10,7 @@ import java.util.*;
 @Getter
 public class UserDao implements GenericDao<User> {
 
-    public static NavigableSet<User> navigableUsers = new TreeSet<>(UserServiceImpl::compareById);
-
-    public List<User> userList = new ArrayList<>(navigableUsers);
-
-    public List<User> userSearchList = new ArrayList<>(navigableUsers);
-
+    public static NavigableSet<User> navigableUsers = new TreeSet<>(UserDao::compareById);
 
 
     public UserDao() {
@@ -36,13 +29,47 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public List<User> getAll() {
-        return userList;
+    public Set<User> getAll() {
+        return navigableUsers;
     }
 
+
     @Override
-    public Optional<User> get(User user) {
-        return Optional.ofNullable(userList.get(user.getId()));
+    public Optional<User> getById(int id) {
+        User user = new User();
+        user.setId(id);
+        User userEqualIdResult = navigableUsers.ceiling(user);
+        if (userEqualIdResult != null && userEqualIdResult.getId() != id) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(userEqualIdResult);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        User user = new User();
+        user.setEmail(email);
+
+        List<User> userList = new ArrayList(navigableUsers);
+        Collections.sort(userList, UserDao::compareByEmail);
+
+        int pos = Collections.binarySearch(userList, user, UserDao::compareByEmail);
+        return pos != -1 ? Optional.of(userList.get(pos)) : null;
+    }
+
+    private static int compareByEmail(User user1, User user2) {
+        if (user1 == user2) return 0;
+        if (user1 == null) return -1;
+        if (user1.getEmail() == user2.getEmail()) return 0;
+        if (user1.getEmail() == null) return -1;
+        return user1.getEmail().compareTo(user2.getEmail());
+    }
+
+    public static int compareById(User user1, User user2) {
+        if (user1 == user2) return -1;
+        if (user1 == null) return 0;
+        if (user1.getId() == user2.getId()) return 0;
+        if (user1.getId() < user2.getId()) return -1;
+        return 1;
     }
 
     @Override
@@ -55,9 +82,4 @@ public class UserDao implements GenericDao<User> {
 
     }
 
-    @Override
-    public Event getName() {
-
-        return null;
-    }
 }

@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -45,34 +47,34 @@ public class UsersTest {
         User user = new User();
         user.setEmail("San");
         User userToVerify = userService.save(user);
-        User testResult = userService.getUserById(userToVerify.getId());
+        Optional<User> testResult = userService.getUserById(userToVerify.getId());
+        assertTrue("Test user is not found", testResult.isPresent());
+        assertEquals("Email is not stored correctly", userToVerify.getEmail(), testResult.get().getEmail());
+        /*
         assertNotNull(testResult);
         assertEquals("Email is not stored correctly", userToVerify.getEmail(), testResult.getEmail());
+        */
         userService.remove(userToVerify.getId());
-        User testResult2 = userService.getUserById(userToVerify.getId());
-        assertNull("Remove method didn't remove user", testResult2);
+        Optional<User> testResult2 = userService.getUserById(userToVerify.getId());
+        assertTrue("Remove method didn't remove user", ! testResult2.isPresent());
     }
 
     @Test
     public void testGetAll() {
-        List<User> dtoList = userService.getAll();
-        dtoList.add(testUser1);
-        dtoList.add(testUser2);
+        Set<User> dtoList = userService.getAll();
         assertTrue("size is not correct", dtoList.size() > 1);
     }
 
     @Test
     public void testGetByEmail() {
-        User testUser = userService.getUserByEmail(testUser1.getEmail());
-        assertNotNull(testUser);
-        assertEquals("Found wrong user", testUser1.getEmail(), testUser.getEmail());
+        Optional<User> testUser = userService.getUserByEmail(testUser1.getEmail());
+        assertTrue("user is not found or found incorrect", testUser.isPresent() && testUser1.getEmail().equals(testUser.get().getEmail()));
     }
 
     @Test
     public void testGetByEmail2() {
-        User testUser = userService.getUserByEmail(testUser2.getEmail());
-        assertNotNull(testUser);
-        assertEquals("Found wrong user", testUser2.getEmail(), testUser.getEmail());
+        Optional<User> testUser = userService.getUserByEmail(testUser2.getEmail());
+        assertTrue("user is not found or found incorrect", testUser.isPresent() && testUser2.getEmail().equals(testUser.get().getEmail()));
     }
 
 

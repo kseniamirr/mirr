@@ -1,16 +1,14 @@
 package com.mirr.tickets.aspect;
 
-import com.mirr.tickets.annotation.Log;
 import com.mirr.tickets.events.Event;
-import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
 
-@Component
+//@Component
 public class EventManager {
 
-    private static @Log
-    Logger LOG;
+    private static Logger LOG;
+
 
 
     public Event getEventById(Integer id) {

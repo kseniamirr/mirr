@@ -1,11 +1,9 @@
 package com.mirr.tickets.booking;
 
-import com.mirr.tickets.annotation.Log;
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.ticket.Ticket;
 import com.mirr.tickets.ticket.TicketService;
 import com.mirr.tickets.users.User;
-import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +15,6 @@ public class BookingServiceImpl implements BookingService {
 
     TicketService ticketService;
 
-    @Log
-    private Logger logger;
 
     @Override
     public double getTicketsPrice(Event event, LocalDateTime dateTime, User user, Set<Long> seats) {

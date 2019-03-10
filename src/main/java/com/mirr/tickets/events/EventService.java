@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface EventService {
 
@@ -13,9 +14,9 @@ public interface EventService {
 
     Optional<Event> getById(int id);
 
-    Event getEventByName(String name);
+    Optional<Event> getEventByName(String name);
 
-    List<Event> getAllEvents();
+    Set<Event> getAllEvents();
 
     SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate);
 

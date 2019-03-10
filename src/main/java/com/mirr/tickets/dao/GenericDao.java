@@ -4,6 +4,7 @@ import com.mirr.tickets.events.Event;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface GenericDao<T> {
 
@@ -11,11 +12,10 @@ public interface GenericDao<T> {
 
     void remove(T t);
 
-    List<T> getAll();
+    Set<T> getAll();
 
-    Optional<T> get(T t);
+    Optional<T> getById(int id);
 
     void update(T t, String[] params);
 
-    Event getName();
 }

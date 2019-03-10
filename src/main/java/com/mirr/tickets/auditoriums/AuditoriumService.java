@@ -5,12 +5,10 @@ import java.util.*;
 
 public interface AuditoriumService {
 
-    public static void getPropertyFile() {
+    Set<Auditorium> getAll();
 
-    }
+    Optional<Auditorium> getByName(String name);
 
+    Optional<Auditorium> getById(int id);
 
-    public Set<Auditorium> getAll();
-
-    public Auditorium getByName(String name);
 }

@@ -1,6 +1,8 @@
 package com.mirr.tickets.users;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 public interface UserService {
 
@@ -10,13 +12,13 @@ public interface UserService {
     void remove(int id);
 
 
-    User getUserById(int id);
+    Optional<User> getUserById(int id);
 
 
-    User getUserByEmail(String email);
+    Optional<User> getUserByEmail(String email);
 
 
-    List<User> getAll();
+    Set<User> getAll();
 
     void update(User user, String[] params);
 

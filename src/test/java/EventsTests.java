@@ -12,6 +12,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -61,8 +62,7 @@ public class EventsTests {
 
         Event event = initEvent();
         eventService.save(event);
-        List<Event> eventList = eventService.getAllEvents();
-        eventList.add(event);
+        Set<Event> eventList = eventService.getAllEvents();
         assertNotEquals("Event collection is empty", 0, eventList.size());
     }
 

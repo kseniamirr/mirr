@@ -14,7 +14,7 @@ import java.util.*;
 
 public class EventServiceImpl implements EventService {
 
-    @Setter
+    @Autowired
     private AuditoriumService auditoriumService;
 
 
@@ -23,15 +23,15 @@ public class EventServiceImpl implements EventService {
 
 
     public SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
-        Event event = getEventByName(eventName);
+        Event event = getEventByName(eventName).orElseThrow(() -> new IllegalArgumentException("There is no such event is announced"));
         if (event == null) {
             throw new IllegalArgumentException("There is no such event is announced");
         }
 
-        Auditorium auditorium = auditoriumService.getByName(auditoriumName);
-        if (auditorium == null) {
+        if (! auditoriumService.getByName(auditoriumName).isPresent()) {
             throw new IllegalArgumentException("There is no such auditorium");
         }
+
 
         int seanceId;
         try {
@@ -82,56 +82,18 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Optional<Event> getById(int id) {
-        Optional<Event> eventById = eventDao.eventList.stream().filter(event -> event.getId() == id).findFirst();
-        {
-            if (eventById.isPresent()) ;
-        }
-        return eventById;
+        return eventDao.getById(id);
     }
-
-//    @Override
-//    public Event getById(int id) {
-//        Event event = new Event();
-//        event.setId(id);
-//        Event eventIdResult = eventsSet.ceiling(event);
-//        if (eventIdResult != null && eventIdResult.getId() != id) {
-//            return null;
-//        }
-//        return eventIdResult;
-//    }
 
     @Override
-    public Event getEventByName(String name) {
-        Event event = new Event();
-        event.setName(name);
-
-
-        Collections.sort(eventDao.eventList, EventServiceImpl::compareByName);
-
-        int pos = Collections.binarySearch(eventDao.eventList, event, EventServiceImpl::compareByName);
-        return eventDao.eventList.get(pos);
-    }
-
-    public static int compareByName(Event event1, Event event2) {
-        if (event1 == event2) return 0;
-        if (event1 == null) return -1;
-        if (event1.getName() == event2.getName()) return 0;
-        if (event1.getName() == null) return -1;
-        return event1.getName().compareTo(event2.getName());
-    }
-
-    private static int compareById(User user1, User user2) {
-        if (user1 == user2) return -1;
-        if (user1 == null) return 0;
-        if (user1.getId() == user2.getId()) return 0;
-        if (user1.getId() < user2.getId()) return -1;
-        return 1;
+    public Optional<Event> getEventByName(String name) {
+        return eventDao.getEventByName(name);
     }
 
 
     @Override
-    public List<Event> getAllEvents() {
-        return eventDao.eventList;
+    public Set<Event> getAllEvents() {
+        return eventDao.getAll();
     }
 
     @Override
@@ -149,6 +111,9 @@ public class EventServiceImpl implements EventService {
 
     }
 
+
+// SAN: unused methods
+    /*
     public boolean assignAuditorium(LocalDateTime dateTime, Auditorium auditorium) {
         if (eventDao.airDates.contains(dateTime)) {
             eventDao.auditoriums.put(dateTime, auditorium);
@@ -195,6 +160,7 @@ public class EventServiceImpl implements EventService {
     public boolean airsOnDates(LocalDate from, LocalDate to) {
         return eventDao.airDates.stream().anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
     }
+*/
 
 }
 

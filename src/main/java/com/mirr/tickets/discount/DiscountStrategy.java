@@ -8,7 +8,7 @@ public class DiscountStrategy {
 
    EventServiceImpl eventService;
 
-    public boolean getBirthdayDiscount(LocalDate from, LocalDate to) {
-        return eventService.airsOnDates(from, to);
-    }
+//    public boolean getBirthdayDiscount(LocalDate from, LocalDate to) {
+//        return eventService.airsOnDates(from, to);
+//    }
 }
