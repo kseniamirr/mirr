@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-@AllArgsConstructor
 public class SeanceDto {
 
     private int seanceId;
@@ -16,4 +15,9 @@ public class SeanceDto {
     private String auditoriumName;
     private LocalDateTime airDateTime;
 
+    public SeanceDto(int eventId, String auditoriumName, LocalDateTime airDateTime) {
+        this.eventId = eventId;
+        this.auditoriumName = auditoriumName;
+        this.airDateTime = airDateTime;
+    }
 }

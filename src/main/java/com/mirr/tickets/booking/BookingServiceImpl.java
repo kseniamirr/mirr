@@ -4,12 +4,14 @@ import com.mirr.tickets.events.Event;
 import com.mirr.tickets.ticket.Ticket;
 import com.mirr.tickets.ticket.TicketService;
 import com.mirr.tickets.users.User;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class BookingServiceImpl implements BookingService {
 
 

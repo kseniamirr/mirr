@@ -3,11 +3,11 @@ package com.mirr.tickets.dao;
 import com.mirr.tickets.users.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Setter
-@Getter
+@Component
 public class UserDao implements GenericDao<User> {
 
     public static NavigableSet<User> navigableUsers = new TreeSet<>(UserDao::compareById);

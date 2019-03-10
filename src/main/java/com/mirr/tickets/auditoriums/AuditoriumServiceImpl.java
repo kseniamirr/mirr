@@ -1,16 +1,14 @@
 package com.mirr.tickets.auditoriums;
 
 
-import com.mirr.tickets.annotation.DBProperties;
 import com.mirr.tickets.dao.AuditoriumDao;
-
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
 
-
+@Component
 public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Autowired

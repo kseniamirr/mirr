@@ -6,12 +6,13 @@ import com.mirr.tickets.dao.EventDao;
 import com.mirr.tickets.users.User;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-
+@Component
 public class EventServiceImpl implements EventService {
 
     @Autowired
@@ -33,17 +34,8 @@ public class EventServiceImpl implements EventService {
         }
 
 
-        int seanceId;
-        try {
-            seanceId = eventDao.seanceDtoSet.last().getSeanceId() + 1;
-        } catch (NoSuchElementException e) {
-            seanceId = 1;
-        }
-
-        SeanceDto seanceDto = new SeanceDto(seanceId, event.getId(), auditoriumName, airDate);
-        seanceDto.setSeanceId(seanceId);
-        eventDao.seanceDtoSet.add(seanceDto);
-        return seanceDto;
+        SeanceDto seanceDto = new SeanceDto(event.getId(), auditoriumName, airDate);
+        return eventDao.saveSeance(seanceDto);
     }
 
     public static int compareByEventAuditoriumDate(SeanceDto seanceDto1, SeanceDto seanceDto2) {
@@ -77,7 +69,7 @@ public class EventServiceImpl implements EventService {
     public void remove(int id) {
         Event event = new Event();
         event.setId(id);
-        eventDao.remove(id);
+        eventDao.remove(event);
     }
 
     @Override

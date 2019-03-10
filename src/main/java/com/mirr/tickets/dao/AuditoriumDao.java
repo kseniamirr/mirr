@@ -6,11 +6,12 @@ import com.mirr.tickets.auditoriums.AuditoriumServiceImpl;
 import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
 
-@Setter
+@Component
 public class AuditoriumDao implements  GenericDao<Auditorium> {
 
     public static NavigableSet<Auditorium> auditoriumSet = new TreeSet<>(AuditoriumDao::compareByName);
