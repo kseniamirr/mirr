@@ -99,58 +99,6 @@ public class EventServiceImpl implements EventService {
     public void update(Event event, String[] params) {
 
     }
-
-
-// SAN: unused methods
-    /*
-    public boolean assignAuditorium(LocalDateTime dateTime, Auditorium auditorium) {
-        if (eventDao.airDates.contains(dateTime)) {
-            eventDao.auditoriums.put(dateTime, auditorium);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean removeAuditoriumAssignment(LocalDateTime dateTime) {
-        return eventDao.auditoriums.remove(dateTime) != null;
-    }
-
-    public boolean addAirDateTime(LocalDateTime dateTime) {
-        return eventDao.airDates.add(dateTime);
-    }
-
-    public boolean addAirDateTime(LocalDateTime dateTime, Auditorium auditorium) {
-        boolean result = eventDao.airDates.add(dateTime);
-        if (result) {
-            eventDao.auditoriums.put(dateTime, auditorium);
-        }
-        return result;
-    }
-
-    public boolean removeAirDateTime(LocalDateTime dateTime) {
-        boolean result = eventDao.airDates.remove(dateTime);
-        if (result) {
-            eventDao.auditoriums.remove(dateTime);
-        }
-        return result;
-    }
-
-    public boolean airsOnDateTime(LocalDateTime dateTime) {
-        return eventDao.airDates.stream().anyMatch(dt -> dt.equals(dateTime));
-    }
-
-
-    public boolean airsOnDate(LocalDate date) {
-        return eventDao.airDates.stream().anyMatch(dt -> dt.toLocalDate().equals(date));
-    }
-
-
-    public boolean airsOnDates(LocalDate from, LocalDate to) {
-        return eventDao.airDates.stream().anyMatch(dt -> dt.toLocalDate().compareTo(from) >= 0 && dt.toLocalDate().compareTo(to) <= 0);
-    }
-*/
-
 }
 
 

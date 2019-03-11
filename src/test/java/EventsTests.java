@@ -1,5 +1,5 @@
 import com.mirr.tickets.annotation.AppConfig;
-import com.mirr.tickets.aspect.EventsAspect;
+import com.mirr.tickets.aspect.CounterEventAspect;
 import com.mirr.tickets.dao.EventDao;
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventService;
@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class EventsTests {
     EventService eventService;
 
     @Autowired
-    EventsAspect eventsAspect;
+    CounterEventAspect counterEventAspect;
 
     private Event event1;
 
@@ -61,7 +60,7 @@ public class EventsTests {
         testEvent = eventService.getEventByName(event1.getName());
         assertTrue("Event not found by name", testEvent.isPresent() && testEvent.get().getName().equals(event1.getName()));
 
-        Optional<Integer> counter = eventsAspect.getCounterByClass(EventDao.class);
+        Optional<Integer> counter = counterEventAspect.getCounterByClass(EventDao.class);
         assertTrue("Counter aspect was not called", counter.isPresent() && counter.get() > 0);
         System.out.println("Counter is: " + counter.get().intValue());
 

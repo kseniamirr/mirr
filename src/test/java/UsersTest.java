@@ -1,4 +1,5 @@
 import com.mirr.tickets.annotation.AppConfig;
+import com.mirr.tickets.aspect.DiscountAspect;
 import com.mirr.tickets.users.User;
 import com.mirr.tickets.users.UserService;
 import com.mirr.tickets.users.UserServiceImpl;
@@ -24,6 +25,9 @@ public class UsersTest {
 
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    DiscountAspect discountAspect;
 
     private User testUser1;
 

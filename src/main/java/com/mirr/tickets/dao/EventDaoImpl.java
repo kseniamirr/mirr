@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-//        ("eventDao")
-//@Qualifier("eventDao")
+
 public class EventDaoImpl implements EventDao {
 
     private static NavigableSet<Event> eventsSet = new TreeSet<Event>(EventDaoImpl::compareById);
@@ -102,15 +101,4 @@ public class EventDaoImpl implements EventDao {
         if (event1.getId() < event2.getId()) return -1;
         return 1;
     }
-
-/*
-
-    public NavigableSet<LocalDateTime> airDates = new TreeSet<>();
-
-    public NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
-
-    public List<Event> eventList = new ArrayList<>(eventsSet);
-    */
-
-
 }
