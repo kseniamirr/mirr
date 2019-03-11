@@ -25,9 +25,6 @@ public class EventServiceImpl implements EventService {
 
     public SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
         Event event = getEventByName(eventName).orElseThrow(() -> new IllegalArgumentException("There is no such event is announced"));
-        if (event == null) {
-            throw new IllegalArgumentException("There is no such event is announced");
-        }
 
         if (! auditoriumService.getByName(auditoriumName).isPresent()) {
             throw new IllegalArgumentException("There is no such auditorium");
