@@ -1,5 +1,5 @@
-import com.mirr.tickets.annotation.AppConfig;
-import com.mirr.tickets.aspect.CounterEventAspect;
+import com.mirr.tickets.annotation.BaseConfig;
+import com.mirr.tickets.aspect.CounterAspect;
 import com.mirr.tickets.dao.EventDao;
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventService;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = BaseConfig.class, loader = AnnotationConfigContextLoader.class)
 public class EventsTests {
 
     private final String AUDITORIUM_NAME = "White";
@@ -30,7 +30,7 @@ public class EventsTests {
     EventService eventService;
 
     @Autowired
-    CounterEventAspect counterEventAspect;
+    CounterAspect counterEventAspect;
 
     private Event event1;
 
@@ -93,7 +93,7 @@ public class EventsTests {
     @Test
     public void testSaveSeance() {
         Event event = EventsTests.initEvent();
-        Event eventAdded = eventService.save(event);
+        eventService.save(event);
 
         LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 

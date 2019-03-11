@@ -20,13 +20,13 @@ public class EventServiceImpl implements EventService {
     EventDao eventDao;
 
 
-    public Seance saveSeance(String eventName, String auditoriumName, LocalDate airDate) {
+    @Override
+    public Seance saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
         Event event = getEventByName(eventName).orElseThrow(() -> new IllegalArgumentException("There is no such event is announced"));
 
         if (! auditoriumService.getByName(auditoriumName).isPresent()) {
             throw new IllegalArgumentException("There is no such auditorium");
         }
-
 
         Seance seance = new Seance(event.getId(), auditoriumName, airDate);
         return eventDao.saveSeance(seance);
@@ -82,10 +82,11 @@ public class EventServiceImpl implements EventService {
         return eventDao.getAll();
     }
 
-    @Override
-    public Seance saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
-        return null;
-    }
+//    @Override
+//    public Seance saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
+//        Seance seance = new Seance()
+//        return eventDao.saveSeance();
+//    }
 
     @Override
     public Event getForDateRange(Date from, Date to) {

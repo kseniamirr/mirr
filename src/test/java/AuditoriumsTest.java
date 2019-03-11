@@ -1,4 +1,4 @@
-import com.mirr.tickets.annotation.AppConfig;
+import com.mirr.tickets.annotation.BaseConfig;
 import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.auditoriums.AuditoriumService;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import java.util.Set;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = BaseConfig.class, loader = AnnotationConfigContextLoader.class)
 public class AuditoriumsTest {
 
     @Autowired

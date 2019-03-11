@@ -14,12 +14,7 @@ public class BaseConfig {
 
     public static void main(String[] args) {
 
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-
-        AuditoriumServiceImpl auditoriumService = ctx.getBean(AuditoriumServiceImpl.class);
-
-
-
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BaseConfig.class);
     }
 
 }

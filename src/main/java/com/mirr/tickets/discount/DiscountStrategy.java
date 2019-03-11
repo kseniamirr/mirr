@@ -37,8 +37,8 @@ public class DiscountStrategy {
 
     public int getBirthdayDiscount(User user, Event event, Seance seance, int numberOfTickets) {
 
-        LocalDate airDate = seance.getAirDateTime();
-        LocalDate birthdayDate = user.getDateOfBirthday();
+        LocalDate airDate = LocalDate.of(0, seance.getAirDateTime().getMonth(), seance.getAirDateTime().getDayOfMonth());
+        LocalDate birthdayDate = LocalDate.of(0, user.getDateOfBirthday().getMonth(), user.getDateOfBirthday().getDayOfMonth());
 
         int discount = 0;
         Period period = Period.between(birthdayDate, airDate);

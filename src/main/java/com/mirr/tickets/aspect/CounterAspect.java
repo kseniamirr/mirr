@@ -1,6 +1,8 @@
 package com.mirr.tickets.aspect;
 
 import com.mirr.tickets.dao.EventDao;
+import com.mirr.tickets.discount.DiscountServiceImpl;
+import com.mirr.tickets.discount.DiscountStrategy;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -13,7 +15,7 @@ import java.util.Optional;
 
 @Component
 @Aspect
-public class CounterEventAspect {
+public class CounterAspect {
 
     private static Map<Class, Integer> counterMap = new HashMap<>();
 
@@ -32,7 +34,18 @@ public class CounterEventAspect {
     public void eventByNameCounterAspect(JoinPoint joinPoint){
         Integer currentNumber = counterMap.get(EventDao.class);
         counterMap.put(EventDao.class, currentNumber != null? currentNumber + 1 : 1);
-        System.out.println("AspectsCounter : ");
+        System.out.println("eventByNameCounterAspect Counter");
+    }
+
+    /**
+     * This is the method which I would like to execute
+     * before a selected method execution.
+     */
+    @Before("execution(* com.mirr.tickets.discount.DiscountStrategy.getBirthdayDiscount(..))")
+    public void discountForSpecificUserCounterAspect(JoinPoint joinPoint){
+        Integer currentNumber = counterMap.get(EventDao.class);
+        counterMap.put(DiscountStrategy.class, currentNumber != null? currentNumber + 1 : 1);
+        System.out.println("discountForSpecificUserCounterAspect aspect");
     }
 
     public Optional<Integer> getCounterByClass(Class clazz) {

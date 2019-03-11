@@ -1,12 +1,10 @@
-import com.mirr.tickets.annotation.AppConfig;
-
+import com.mirr.tickets.annotation.BaseConfig;
+import com.mirr.tickets.aspect.CounterAspect;
 import com.mirr.tickets.discount.DiscountStrategy;
 import com.mirr.tickets.events.Event;
-
 import com.mirr.tickets.events.EventService;
 import com.mirr.tickets.events.Seance;
 import com.mirr.tickets.users.User;
-
 import com.mirr.tickets.users.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +15,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = BaseConfig.class, loader = AnnotationConfigContextLoader.class)
 public class DiscountTests {
 
     @Autowired
@@ -33,6 +34,9 @@ public class DiscountTests {
 
     @Autowired
     DiscountStrategy discountStrategy;
+
+    @Autowired
+    CounterAspect counterAspect;
 
     private Event event;
 
@@ -66,15 +70,17 @@ public class DiscountTests {
         user2.setLastName("Abramova");
         user2 = userService.save(user2);
 
-        seance = new Seance(1, "Blue", LocalDate.of(2019, 03, 11));
+        seance = new Seance(1, "Blue", LocalDateTime.of(2019, 03, 11, 22, 10));
         seance.setSeanceId(1);
-        seance.setAirDateTime(LocalDate.of(2019,03,11));
     }
 
     @Test
     public void getBirthdayDiscount() {
-        discountStrategy.getBirthdayDiscount(user, event, seance, 10);
-        //assertThat("Discount is not correct ", 5, 5  );
-        }
+        int discount = discountStrategy.getBirthdayDiscount(user, event, seance, 10);
+        assertEquals("Discount is not correct ", 5, discount);
+        Optional<Integer> aspectCounter = counterAspect.getCounterByClass(DiscountStrategy.class);
+        assertTrue("", aspectCounter.isPresent() && aspectCounter.get() > 0);
+        System.out.println("Counter is: " + aspectCounter.get().intValue());
+    }
 
 }

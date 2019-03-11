@@ -1,7 +1,5 @@
-import com.mirr.tickets.annotation.AppConfig;
-import com.mirr.tickets.aspect.DiscountAspect;
+import com.mirr.tickets.annotation.BaseConfig;
 import com.mirr.tickets.users.User;
-import com.mirr.tickets.users.UserService;
 import com.mirr.tickets.users.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,24 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfig.class})
+@ContextConfiguration(classes = {BaseConfig.class})
 public class UsersTest {
 
 
     @Autowired
     UserServiceImpl userService;
-
-    @Autowired
-    DiscountAspect discountAspect;
 
     private User testUser1;
 
