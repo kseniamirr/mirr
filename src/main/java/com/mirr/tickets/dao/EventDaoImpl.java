@@ -2,7 +2,7 @@ package com.mirr.tickets.dao;
 
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventServiceImpl;
-import com.mirr.tickets.events.SeanceDto;
+import com.mirr.tickets.events.Seance;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -13,7 +13,7 @@ public class EventDaoImpl implements EventDao {
 
     private static NavigableSet<Event> eventsSet = new TreeSet<Event>(EventDaoImpl::compareById);
 
-    public static NavigableSet<SeanceDto> seanceDtoSet = new TreeSet<>(EventServiceImpl::compareByEventAuditoriumDate);
+    public static NavigableSet<Seance> seanceSet = new TreeSet<>(EventServiceImpl::compareByEventAuditoriumDate);
 
     @Override
     public void save(Event event) {
@@ -73,17 +73,17 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public SeanceDto saveSeance(SeanceDto seanceDto) {
+    public Seance saveSeance(Seance seance) {
         int seanceId;
         try {
-            seanceId = seanceDtoSet.last().getSeanceId() + 1;
+            seanceId = seanceSet.last().getSeanceId() + 1;
         } catch (NoSuchElementException e) {
             seanceId = 1;
         }
 
-        seanceDto.setSeanceId(seanceId);
-        seanceDtoSet.add(seanceDto);
-        return seanceDto;
+        seance.setSeanceId(seanceId);
+        seanceSet.add(seance);
+        return seance;
     }
 
     public static int compareByName(Event event1, Event event2) {

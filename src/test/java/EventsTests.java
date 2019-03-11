@@ -3,7 +3,7 @@ import com.mirr.tickets.aspect.CounterEventAspect;
 import com.mirr.tickets.dao.EventDao;
 import com.mirr.tickets.events.Event;
 import com.mirr.tickets.events.EventService;
-import com.mirr.tickets.events.SeanceDto;
+import com.mirr.tickets.events.Seance;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,11 +97,11 @@ public class EventsTests {
 
         LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 
-        SeanceDto seanceDto = eventService.saveSeance(event.getName(), AUDITORIUM_NAME, airDateTime);
+        Seance seance = eventService.saveSeance(event.getName(), AUDITORIUM_NAME, airDateTime);
 
-        assertNotEquals("seance id is not filled", 0, seanceDto.getSeanceId());
-        assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seanceDto.getAuditoriumName());
-        assertEquals("seance air date/time is not correct", airDateTime, seanceDto.getAirDateTime());
+        assertNotEquals("seance id is not filled", 0, seance.getSeanceId());
+        assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seance.getAuditoriumName());
+        assertEquals("seance air date/time is not correct", airDateTime, seance.getAirDateTime());
     }
 
 }

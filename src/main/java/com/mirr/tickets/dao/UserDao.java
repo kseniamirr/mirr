@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -14,8 +15,8 @@ public class UserDao implements GenericDao<User> {
 
 
     public UserDao() {
-        navigableUsers.add(new User(1, "kseniamirr@gmail.com", "Oksana", "Abramova"));
-        navigableUsers.add(new User(2, "sun@gmail.com", "Alex", "Abramov"));
+        navigableUsers.add(new User(1, "kseniamirr@gmail.com", "Oksana", "Abramova", LocalDate.of(1985,03,16)));
+        navigableUsers.add(new User(2, "sun@gmail.com", "Alex", "Abramov", LocalDate.of(1973,04,8)));
     }
 
     @Override

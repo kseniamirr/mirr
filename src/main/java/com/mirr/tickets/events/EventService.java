@@ -2,7 +2,6 @@ package com.mirr.tickets.events;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public interface EventService {
 
     Set<Event> getAllEvents();
 
-    SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate);
+    Seance saveSeance(String eventName, String auditoriumName, LocalDateTime airDate);
 
     Event getForDateRange(Date from, Date to);
 

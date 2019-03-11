@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String firsName;
     private String lastName;
-   // private LocalDate dateOfBirthday;
+    private LocalDate dateOfBirthday;
 
     public User() {
 

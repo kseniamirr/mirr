@@ -1,10 +1,7 @@
 package com.mirr.tickets.events;
 
-import com.mirr.tickets.auditoriums.Auditorium;
 import com.mirr.tickets.auditoriums.AuditoriumService;
 import com.mirr.tickets.dao.EventDao;
-import com.mirr.tickets.users.User;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +20,7 @@ public class EventServiceImpl implements EventService {
     EventDao eventDao;
 
 
-    public SeanceDto saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
+    public Seance saveSeance(String eventName, String auditoriumName, LocalDate airDate) {
         Event event = getEventByName(eventName).orElseThrow(() -> new IllegalArgumentException("There is no such event is announced"));
 
         if (! auditoriumService.getByName(auditoriumName).isPresent()) {
@@ -31,26 +28,26 @@ public class EventServiceImpl implements EventService {
         }
 
 
-        SeanceDto seanceDto = new SeanceDto(event.getId(), auditoriumName, airDate);
-        return eventDao.saveSeance(seanceDto);
+        Seance seance = new Seance(event.getId(), auditoriumName, airDate);
+        return eventDao.saveSeance(seance);
     }
 
-    public static int compareByEventAuditoriumDate(SeanceDto seanceDto1, SeanceDto seanceDto2) {
-        if (seanceDto1 == seanceDto2) return 0;
-        if (seanceDto1 == null) return -1;
-        if (seanceDto1.getEventId() == seanceDto2.getEventId()) {
-            if (seanceDto1.getAuditoriumName() == seanceDto2.getAuditoriumName()) {
-                if (seanceDto1.getAirDateTime() == seanceDto2.getAirDateTime()) return 0;
-                if (seanceDto1.getAirDateTime() == null) return -1;
-                return seanceDto1.getAirDateTime().compareTo(seanceDto2.getAirDateTime());
+    public static int compareByEventAuditoriumDate(Seance seance1, Seance seance2) {
+        if (seance1 == seance2) return 0;
+        if (seance1 == null) return -1;
+        if (seance1.getEventId() == seance2.getEventId()) {
+            if (seance1.getAuditoriumName() == seance2.getAuditoriumName()) {
+                if (seance1.getAirDateTime() == seance2.getAirDateTime()) return 0;
+                if (seance1.getAirDateTime() == null) return -1;
+                return seance1.getAirDateTime().compareTo(seance2.getAirDateTime());
             } else {
-                if (seanceDto1.getAuditoriumName() == null) {
+                if (seance1.getAuditoriumName() == null) {
                     return -1;
                 }
-                return seanceDto1.getAuditoriumName().compareTo(seanceDto2.getAuditoriumName());
+                return seance1.getAuditoriumName().compareTo(seance2.getAuditoriumName());
             }
         } else {
-            return seanceDto1.getEventId() < seanceDto2.getEventId() ? -1 : 1;
+            return seance1.getEventId() < seance2.getEventId() ? -1 : 1;
         }
 
     }
@@ -83,6 +80,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public Set<Event> getAllEvents() {
         return eventDao.getAll();
+    }
+
+    @Override
+    public Seance saveSeance(String eventName, String auditoriumName, LocalDateTime airDate) {
+        return null;
     }
 
     @Override

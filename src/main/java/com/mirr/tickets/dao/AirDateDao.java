@@ -1,11 +1,13 @@
 package com.mirr.tickets.dao;
 
 import com.mirr.tickets.auditoriums.Auditorium;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@Component
 public class AirDateDao {
 
 
