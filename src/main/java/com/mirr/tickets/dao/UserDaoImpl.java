@@ -1,15 +1,21 @@
 package com.mirr.tickets.dao;
 
 import com.mirr.tickets.users.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
 
-@Component
+
 @Service("genericDao")
 public class UserDaoImpl implements GenericDao<User> {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public static NavigableSet<User> navigableUsers = new TreeSet<>(UserDaoImpl::compareById);
 

@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    private UserDaoImpl userDaoImpl;
+    public UserDaoImpl userDaoImpl;
 
     @Override
     public User save(User user) {

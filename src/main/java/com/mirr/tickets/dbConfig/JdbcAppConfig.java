@@ -1,4 +1,4 @@
-package com.mirr.tickets.configuration;
+package com.mirr.tickets.dbConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "com.mirr.tickets.jdbc")
-@PropertySource(value = {"classpath:application.properties"})
-public class ApplicationConfig {
+@PropertySource(value = {"classpath:jdbc.properties"})
+public class JdbcAppConfig {
 
     @Autowired
     private Environment env;

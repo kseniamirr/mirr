@@ -10,13 +10,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Component
 @Repository
 @Qualifier("genericDao")
-public class UserDaoImpl implements GenericDao<User> {
+public class JdbcUserDao implements GenericDao<User> {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    public JdbcTemplate jdbcTemplate(){
+        return jdbcTemplate;
+    }
 
     @Override
     public void add(User user) {
