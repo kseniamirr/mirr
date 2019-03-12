@@ -1,7 +1,6 @@
 package com.mirr.tickets.dao;
 
 import com.mirr.tickets.ticket.Ticket;
-
 import java.util.NavigableSet;
 import java.util.Optional;
 import java.util.Set;
@@ -13,12 +12,12 @@ public class TicketDao implements GenericDao<Ticket> {
     NavigableSet<Ticket> tickets = new TreeSet<>();
 
     @Override
-    public void save(Ticket ticket) {
+    public void add(Ticket ticket) {
 
     }
 
     @Override
-    public void remove(Ticket ticket) {
+    public void delete(Ticket ticket) {
 
     }
 

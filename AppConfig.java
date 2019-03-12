@@ -19,8 +19,8 @@ public class AppConfig {
 
 
 //    @Bean
-//    public UserServiceImpl user() {
-//        return new UserServiceImpl();
+//    public UserDaoImpl user() {
+//        return new UserDaoImpl();
 //    }
 
 //    @Bean
@@ -39,8 +39,8 @@ public class AppConfig {
 //    }
 
 //    @Bean
-//    public UserDao userDao() {
-//        return new UserDao();
+//    public UserDaoImpl userDao() {
+//        return new UserDaoImpl();
 //    }
 
 //    @Bean

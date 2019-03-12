@@ -44,16 +44,16 @@ public class UsersTest {
         User user = new User();
         user.setEmail("San");
         User userToVerify = userService.save(user);
-        Optional<User> testResult = userService.getUserById(userToVerify.getId());
+        Optional<User> testResult = userService.getUserById(userToVerify.getUserId());
         assertTrue("Test user is not found", testResult.isPresent());
         assertEquals("Email is not stored correctly", userToVerify.getEmail(), testResult.get().getEmail());
         /*
         assertNotNull(testResult);
         assertEquals("Email is not stored correctly", userToVerify.getEmail(), testResult.getEmail());
         */
-        userService.remove(userToVerify.getId());
-        Optional<User> testResult2 = userService.getUserById(userToVerify.getId());
-        assertTrue("Remove method didn't remove user", ! testResult2.isPresent());
+        userService.remove(userToVerify.getUserId());
+        Optional<User> testResult2 = userService.getUserById(userToVerify.getUserId());
+        assertTrue("Remove method didn't delete user", ! testResult2.isPresent());
     }
 
     @Test

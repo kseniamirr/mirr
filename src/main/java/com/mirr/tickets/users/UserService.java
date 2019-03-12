@@ -20,6 +20,4 @@ public interface UserService {
 
     Set<User> getAll();
 
-    void update(User user, String[] params);
-
 }

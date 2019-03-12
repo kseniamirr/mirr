@@ -20,13 +20,13 @@ public class BookingTest {
 //    @BeforeClass
 //    public void initData() {
 //        Event eventDto = EventsTests.initEvent();
-//        Event eventDtoAdded = eventService.save(eventDto);
+//        Event eventDtoAdded = eventService.add(eventDto);
 //
 //        LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 //
 //        Seance seanceDto = eventService.saveSeance(eventDto.getName(), AUDITORIUM_NAME, airDateTime);
 //
-//        assertNotEquals("seance id is not filled", 0, seanceDto.getSeanceId());
+//        assertNotEquals("seance userId is not filled", 0, seanceDto.getSeanceId());
 //        assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seanceDto.getAuditoriumName());
 //        assertEquals("seance air date/time is not correct", airDateTime, seanceDto.getAirDateTime());
 //    }

@@ -14,12 +14,12 @@ public class AuditoriumDao implements  GenericDao<Auditorium> {
     public static NavigableSet<Auditorium> auditoriumSet = new TreeSet<>(AuditoriumDao::compareByName);
 
     @Override
-    public void save(Auditorium auditorium) {
+    public void add(Auditorium auditorium) {
         throw new UnsupportedOperationException("This operation is not supported for Auditorium");
     }
 
     @Override
-    public void remove(Auditorium auditorium) {
+    public void delete(Auditorium auditorium) {
         throw new UnsupportedOperationException("This operation is not supported for Auditorium");
     }
 
@@ -96,6 +96,4 @@ public class AuditoriumDao implements  GenericDao<Auditorium> {
         Set<Long> vipSeats = Collections.emptySet();
         return seats.stream().filter(seat -> vipSeats.contains(seat)).count();
     }
-
-
 }

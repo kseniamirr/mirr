@@ -1,31 +1,31 @@
 package com.mirr.tickets.dao;
 
 import com.mirr.tickets.users.User;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Component
-public class UserDao implements GenericDao<User> {
+@Service("genericDao")
+public class UserDaoImpl implements GenericDao<User> {
 
-    public static NavigableSet<User> navigableUsers = new TreeSet<>(UserDao::compareById);
+    public static NavigableSet<User> navigableUsers = new TreeSet<>(UserDaoImpl::compareById);
 
 
-    public UserDao() {
-        navigableUsers.add(new User(1, "kseniamirr@gmail.com", "Oksana", "Abramova", LocalDate.of(1985,03,16)));
-        navigableUsers.add(new User(2, "sun@gmail.com", "Alex", "Abramov", LocalDate.of(1973,04,8)));
+    public UserDaoImpl() {
+        navigableUsers.add(new User(1, "kseniamirr@gmail.com", "Oksana", "Abramova", LocalDate.of(1985, 03, 16)));
+        navigableUsers.add(new User(2, "sun@gmail.com", "Alex", "Abramov", LocalDate.of(1973, 04, 8)));
     }
 
     @Override
-    public void save(User user) {
+    public void add(User user) {
         navigableUsers.add(user);
     }
 
     @Override
-    public void remove(User user) {
+    public void delete(User user) {
         navigableUsers.remove(user);
     }
 
@@ -38,9 +38,9 @@ public class UserDao implements GenericDao<User> {
     @Override
     public Optional<User> getById(int id) {
         User user = new User();
-        user.setId(id);
+        user.setUserId(id);
         User userEqualIdResult = navigableUsers.ceiling(user);
-        if (userEqualIdResult != null && userEqualIdResult.getId() != id) {
+        if (userEqualIdResult != null && userEqualIdResult.getUserId() != id) {
             return Optional.empty();
         }
         return Optional.ofNullable(userEqualIdResult);
@@ -51,9 +51,9 @@ public class UserDao implements GenericDao<User> {
         user.setEmail(email);
 
         List<User> userList = new ArrayList(navigableUsers);
-        Collections.sort(userList, UserDao::compareByEmail);
+        Collections.sort(userList, UserDaoImpl::compareByEmail);
 
-        int pos = Collections.binarySearch(userList, user, UserDao::compareByEmail);
+        int pos = Collections.binarySearch(userList, user, UserDaoImpl::compareByEmail);
         return pos != -1 ? Optional.of(userList.get(pos)) : null;
     }
 
@@ -68,8 +68,8 @@ public class UserDao implements GenericDao<User> {
     public static int compareById(User user1, User user2) {
         if (user1 == user2) return -1;
         if (user1 == null) return 0;
-        if (user1.getId() == user2.getId()) return 0;
-        if (user1.getId() < user2.getId()) return -1;
+        if (user1.getUserId() == user2.getUserId()) return 0;
+        if (user1.getUserId() < user2.getUserId()) return -1;
         return 1;
     }
 
@@ -80,7 +80,5 @@ public class UserDao implements GenericDao<User> {
         user.setLastName(Objects.requireNonNull(params[3], "Email name connot be null"));
 
         navigableUsers.add(user);
-
     }
-
 }

@@ -5,7 +5,6 @@ import com.mirr.tickets.dao.EventDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -55,7 +54,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event event) {
-        eventDao.save(event);
+        eventDao.add(event);
         return event;
     }
 
@@ -63,7 +62,7 @@ public class EventServiceImpl implements EventService {
     public void remove(int id) {
         Event event = new Event();
         event.setId(id);
-        eventDao.remove(event);
+        eventDao.delete(event);
     }
 
     @Override

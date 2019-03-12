@@ -12,7 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class User {
 
-    private int id;
+    private int userId;
     private String email;
     private String firsName;
     private String lastName;
@@ -28,11 +28,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id;
+        return userId == user.userId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email);
+        return Objects.hash(userId, email);
     }
 }

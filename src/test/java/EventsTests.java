@@ -69,7 +69,7 @@ public class EventsTests {
     @Test
     public void getEventIdTest() {
         Optional<Event> testEvent = eventService.getById(event1.getId());
-        assertTrue("Event not found by id", testEvent.isPresent() && testEvent.get().getId() == event1.getId());
+        assertTrue("Event not found by userId", testEvent.isPresent() && testEvent.get().getId() == event1.getId());
     }
 
     static Event initEvent() {
@@ -99,7 +99,7 @@ public class EventsTests {
 
         Seance seance = eventService.saveSeance(event.getName(), AUDITORIUM_NAME, airDateTime);
 
-        assertNotEquals("seance id is not filled", 0, seance.getSeanceId());
+        assertNotEquals("seance userId is not filled", 0, seance.getSeanceId());
         assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seance.getAuditoriumName());
         assertEquals("seance air date/time is not correct", airDateTime, seance.getAirDateTime());
     }
