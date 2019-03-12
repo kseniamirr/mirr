@@ -20,7 +20,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Event getEvent() {
         Event event = new Event();
-        event.getName();
+        event.getEventName();
         return event;
     }
 

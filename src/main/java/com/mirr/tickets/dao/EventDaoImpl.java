@@ -17,11 +17,11 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public void add(Event event) {
-        if (event.getId() == 0) {
+        if (event.getEventId() == 0) {
             try {
-                event.setId(eventsSet.last().getId() + 1);
+                event.setEventId(eventsSet.last().getEventId() + 1);
             } catch (NoSuchElementException e) {
-                event.setId(1);
+                event.setEventId(1);
             }
         }
         eventsSet.add(event);
@@ -33,7 +33,7 @@ public class EventDaoImpl implements EventDao {
     }
 
     public void remove(int id) {
-        Optional<Event> event = eventsSet.stream().filter(e -> e.getId() == id).findFirst();
+        Optional<Event> event = eventsSet.stream().filter(e -> e.getEventId() == id).findFirst();
         if (event.isPresent()) {
             eventsSet.remove(event.get());
         }
@@ -47,9 +47,9 @@ public class EventDaoImpl implements EventDao {
     @Override
     public Optional<Event> getById(int id) {
         Event event = new Event();
-        event.setId(id);
+        event.setEventId(id);
         Event eventIdResult = eventsSet.ceiling(event);
-        if (eventIdResult != null && eventIdResult.getId() != id) {
+        if (eventIdResult != null && eventIdResult.getEventId() != id) {
             return Optional.empty();
         }
         return Optional.of(eventIdResult);
@@ -62,7 +62,7 @@ public class EventDaoImpl implements EventDao {
 
        public Optional<Event> getEventByName(String name) {
         Event event = new Event();
-        event.setName(name);
+        event.setEventName(name);
 
         List<Event> eventList = new ArrayList<>(eventsSet);
         Collections.sort(eventList, EventDaoImpl::compareByName);
@@ -88,16 +88,16 @@ public class EventDaoImpl implements EventDao {
     public static int compareByName(Event event1, Event event2) {
         if (event1 == event2) return 0;
         if (event1 == null) return -1;
-        if (event1.getName() == event2.getName()) return 0;
-        if (event1.getName() == null) return -1;
-        return event1.getName().compareTo(event2.getName());
+        if (event1.getEventName() == event2.getEventName()) return 0;
+        if (event1.getEventName() == null) return -1;
+        return event1.getEventName().compareTo(event2.getEventName());
     }
 
     private static int compareById(Event event1, Event event2) {
         if (event1 == event2) return -1;
         if (event1 == null) return 0;
-        if (event1.getId() == event2.getId()) return 0;
-        if (event1.getId() < event2.getId()) return -1;
+        if (event1.getEventId() == event2.getEventId()) return 0;
+        if (event1.getEventId() < event2.getEventId()) return -1;
         return 1;
     }
 }

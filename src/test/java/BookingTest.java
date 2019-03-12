@@ -24,7 +24,7 @@ public class BookingTest {
 //
 //        LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 //
-//        Seance seanceDto = eventService.saveSeance(eventDto.getName(), AUDITORIUM_NAME, airDateTime);
+//        Seance seanceDto = eventService.saveSeance(eventDto.getEventName(), AUDITORIUM_NAME, airDateTime);
 //
 //        assertNotEquals("seance userId is not filled", 0, seanceDto.getSeanceId());
 //        assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seanceDto.getAuditoriumName());

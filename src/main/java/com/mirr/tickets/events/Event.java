@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 public class Event {
 
-    private String name;
+    private String eventName;
     private double basePrice;
     private EventRating eventRating;
-    private int id;
+    private int eventId;
 
 }

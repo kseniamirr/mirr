@@ -23,7 +23,7 @@ public class Auditorium {
     @Override
     public String toString() {
         return "Auditorium{" +
-                "name='" + name + '\'' +
+                "eventName='" + name + '\'' +
                 ", numberOfSeats=" + numberOfSeats +
                 ", vipSeats=" + Arrays.toString(vipSeats) +
                 '}';

@@ -81,9 +81,9 @@ public class UserDaoImpl implements GenericDao<User> {
 
     @Override
     public void update(User user, String[] params) {
-        user.setLastName(Objects.requireNonNull(params[1], "First name connot be null"));
-        user.setLastName(Objects.requireNonNull(params[2], "Last name connot be null"));
-        user.setLastName(Objects.requireNonNull(params[3], "Email name connot be null"));
+        user.setLastName(Objects.requireNonNull(params[1], "First eventName connot be null"));
+        user.setLastName(Objects.requireNonNull(params[2], "Last eventName connot be null"));
+        user.setLastName(Objects.requireNonNull(params[3], "Email eventName connot be null"));
 
         navigableUsers.add(user);
     }

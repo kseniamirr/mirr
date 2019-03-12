@@ -39,11 +39,11 @@ public class EventsTests {
     @Before
     public void prepareTestData() {
         event1 = new Event();
-        event1.setName("Blue");
+        event1.setEventName("Blue");
         event1 = eventService.save(event1);
 
         event2 = new Event();
-        event2.setName("Green");
+        event2.setEventName("Green");
         event2 = eventService.save(event2);
     }
 
@@ -51,14 +51,14 @@ public class EventsTests {
 
     @Test
     public void getNameTest() {
-        Optional<Event> testEvent = eventService.getEventByName(event1.getName());
-        assertTrue("Event not found by name", testEvent.isPresent() && testEvent.get().getName().equals(event1.getName()));
+        Optional<Event> testEvent = eventService.getEventByName(event1.getEventName());
+        assertTrue("Event not found by eventName", testEvent.isPresent() && testEvent.get().getEventName().equals(event1.getEventName()));
 
-        testEvent = eventService.getEventByName(event2.getName());
-        assertTrue("Event not found by name", testEvent.isPresent() && testEvent.get().getName().equals(event2.getName()));
+        testEvent = eventService.getEventByName(event2.getEventName());
+        assertTrue("Event not found by eventName", testEvent.isPresent() && testEvent.get().getEventName().equals(event2.getEventName()));
 
-        testEvent = eventService.getEventByName(event1.getName());
-        assertTrue("Event not found by name", testEvent.isPresent() && testEvent.get().getName().equals(event1.getName()));
+        testEvent = eventService.getEventByName(event1.getEventName());
+        assertTrue("Event not found by eventName", testEvent.isPresent() && testEvent.get().getEventName().equals(event1.getEventName()));
 
         Optional<Integer> counter = counterEventAspect.getCounterByClass(EventDao.class);
         assertTrue("Counter aspect was not called", counter.isPresent() && counter.get() > 0);
@@ -68,14 +68,14 @@ public class EventsTests {
 
     @Test
     public void getEventIdTest() {
-        Optional<Event> testEvent = eventService.getById(event1.getId());
-        assertTrue("Event not found by userId", testEvent.isPresent() && testEvent.get().getId() == event1.getId());
+        Optional<Event> testEvent = eventService.getById(event1.getEventId());
+        assertTrue("Event not found by userId", testEvent.isPresent() && testEvent.get().getEventId() == event1.getEventId());
     }
 
     static Event initEvent() {
         Event event = new Event();
-        event.setId(0355);
-        event.setName("Vice");
+        event.setEventId(0355);
+        event.setEventName("Vice");
         event.setBasePrice(15);
         return event;
     }
@@ -97,7 +97,7 @@ public class EventsTests {
 
         LocalDateTime airDateTime = LocalDateTime.of(2019, 03, 07, 20, 00);
 
-        Seance seance = eventService.saveSeance(event.getName(), AUDITORIUM_NAME, airDateTime);
+        Seance seance = eventService.saveSeance(event.getEventName(), AUDITORIUM_NAME, airDateTime);
 
         assertNotEquals("seance userId is not filled", 0, seance.getSeanceId());
         assertEquals("seance auditorium is not correct", AUDITORIUM_NAME, seance.getAuditoriumName());

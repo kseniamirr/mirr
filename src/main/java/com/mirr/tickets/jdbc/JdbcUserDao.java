@@ -42,7 +42,7 @@ public class JdbcUserDao implements GenericDao<User> {
 
     @Override
     public Optional<User> getById(int id) {
-        jdbcTemplate.query("SELECT * from user_table WHERE id=1", new BeanPropertyRowMapper<>(User.class));
+        jdbcTemplate.query("SELECT * from user_table WHERE eventId=1", new BeanPropertyRowMapper<>(User.class));
         return Optional.empty();
     }
 

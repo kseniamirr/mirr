@@ -52,11 +52,11 @@ public class DiscountTests {
     @Before
     public void prepareTestData() {
         event = new Event();
-        event.setName("Game og thrones");
+        event.setEventName("Game og thrones");
         event = eventService.save(event);
 
         event2 = new Event();
-        event2.setName("Born a star");
+        event2.setEventName("Born a star");
         event2 = eventService.save(event2);
 
         user = new User();

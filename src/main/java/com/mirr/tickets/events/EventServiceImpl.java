@@ -27,7 +27,7 @@ public class EventServiceImpl implements EventService {
             throw new IllegalArgumentException("There is no such auditorium");
         }
 
-        Seance seance = new Seance(event.getId(), auditoriumName, airDate);
+        Seance seance = new Seance(event.getEventId(), auditoriumName, airDate);
         return eventDao.saveSeance(seance);
     }
 
@@ -61,7 +61,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void remove(int id) {
         Event event = new Event();
-        event.setId(id);
+        event.setEventId(id);
         eventDao.delete(event);
     }
 
