@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+@Repository("userDaoImpl")
 @Qualifier("genericDao")
 public class JdbcUserDao implements GenericDao<User> {
 

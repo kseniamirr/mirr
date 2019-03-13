@@ -2,6 +2,7 @@ package com.mirr.tickets.annotation;
 
 import com.mirr.tickets.dbConfig.JdbcAppConfig;
 import com.mirr.tickets.dao.GenericDao;
+import com.mirr.tickets.jdbc.JdbcUserDao;
 import com.mirr.tickets.users.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,25 +23,26 @@ public class BaseConfig {
        // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BaseConfig.class);
 
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(JdbcAppConfig.class);
-        GenericDao userDao = (GenericDao) context.getBean("genericDao");
+        //GenericDao userDao = (GenericDao) context.getBean("jdbcUserDao");
+        JdbcUserDao jdbcUserDao = (JdbcUserDao) context.getBean("userDaoImpl");
 
         User oksana = new User(1, "kseniamirr@gmail.com", "Oksana", "Abramova", LocalDate.of(1985, 03, 16));
         User alex = new User(2, "sunabramov@gmail.com", "Alex", "Abramov", LocalDate.of(1973, 04, 8));
         User ladyGaga = new User(3, "gaga@gmail.com", "Lady", "Gaga", LocalDate.of(1970, 05, 05));
 
-        userDao.add(oksana);
-        userDao.add(alex);
-        userDao.add(ladyGaga);
+        jdbcUserDao.add(oksana);
+        jdbcUserDao.add(alex);
+        jdbcUserDao.add(ladyGaga);
 
         System.out.println("Find All");
-        Set<User> listUsers = userDao.getAll();
+        Set<User> listUsers = jdbcUserDao.getAll();
         for (User users : listUsers) {
             System.out.println(users);
         }
 
         System.out.println("Delete user");
         User delete = new User();
-        userDao.delete(delete);
+        jdbcUserDao.delete(delete);
 
         oksana.setFirsName("Oksana - Updated");
 

@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
-
-@Service("genericDao")
+@Repository("genericDao")
 public class UserDaoImpl implements GenericDao<User> {
 
     @Autowired

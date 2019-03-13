@@ -1,9 +1,11 @@
 package com.mirr.tickets.users;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 import java.util.Set;
 
+@Service
 public interface UserService {
 
     User save(User user);
