@@ -1,7 +1,4 @@
 package com.mirr.tickets.annotation;
-
-import com.mirr.tickets.dbConfig.JdbcAppConfig;
-import com.mirr.tickets.dao.GenericDao;
 import com.mirr.tickets.jdbc.JdbcUserDao;
 import com.mirr.tickets.users.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -22,7 +19,7 @@ public class BaseConfig {
 
        // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BaseConfig.class);
 
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext(JdbcAppConfig.class);
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext("dao.pacvkage");
         //GenericDao userDao = (GenericDao) context.getBean("jdbcUserDao");
         JdbcUserDao jdbcUserDao = (JdbcUserDao) context.getBean("userDaoImpl");
 
