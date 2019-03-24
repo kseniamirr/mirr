@@ -1,6 +1,7 @@
 package com.mirr.tickets.dao;
 
 import com.mirr.tickets.users.User;
+import com.mirr.tickets.users.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
-@Repository("genericDao")
-public class UserDaoImpl implements GenericDao<User> {
+@Repository("userDaoStatic")
+public class UserDaoImpl implements UserDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -25,8 +26,16 @@ public class UserDaoImpl implements GenericDao<User> {
     }
 
     @Override
-    public void add(User user) {
+    public User add(User user) {
+        if (user.getUserId() == 0) {
+            try {
+                user.setUserId(navigableUsers.last().getUserId() + 1);
+            } catch (NoSuchElementException e) {
+                user.setUserId(0);
+            }
+        }
         navigableUsers.add(user);
+        return user;
     }
 
     @Override

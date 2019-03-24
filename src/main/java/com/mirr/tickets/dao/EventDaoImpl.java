@@ -16,7 +16,7 @@ public class EventDaoImpl implements EventDao {
     public static NavigableSet<Seance> seanceSet = new TreeSet<>(EventServiceImpl::compareByEventAuditoriumDate);
 
     @Override
-    public void add(Event event) {
+    public Event add(Event event) {
         if (event.getEventId() == 0) {
             try {
                 event.setEventId(eventsSet.last().getEventId() + 1);
@@ -25,6 +25,7 @@ public class EventDaoImpl implements EventDao {
             }
         }
         eventsSet.add(event);
+        return event;
     }
 
     @Override

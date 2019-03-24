@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface GenericDao<T> {
 
-    void add(T t);
+    T add(T t);
 
     void delete(T t);
 

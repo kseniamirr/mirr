@@ -1,10 +1,13 @@
 import com.mirr.tickets.annotation.BaseConfig;
 import com.mirr.tickets.users.User;
 import com.mirr.tickets.users.UserServiceImpl;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,6 +24,9 @@ public class UsersTest {
 
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     private User testUser1;
 
@@ -72,6 +78,11 @@ public class UsersTest {
     public void testGetByEmail2() {
         Optional<User> testUser = userService.getUserByEmail(testUser2.getEmail());
         assertTrue("user is not found or found incorrect", testUser.isPresent() && testUser2.getEmail().equals(testUser.get().getEmail()));
+    }
+
+    @After
+    public void deleteTestData() {
+        jdbcTemplate.update("delete from users where user_id > 0");
     }
 
 

@@ -3,6 +3,7 @@ package com.mirr.tickets.events;
 import com.mirr.tickets.auditoriums.AuditoriumService;
 import com.mirr.tickets.dao.EventDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public class EventServiceImpl implements EventService {
 
 
     @Autowired
+    @Qualifier("genericDao")
     EventDao eventDao;
 
 

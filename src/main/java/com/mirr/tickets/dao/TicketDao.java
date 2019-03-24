@@ -12,8 +12,8 @@ public class TicketDao implements GenericDao<Ticket> {
     NavigableSet<Ticket> tickets = new TreeSet<>();
 
     @Override
-    public void add(Ticket ticket) {
-
+    public Ticket add(Ticket ticket) {
+        return null;
     }
 
     @Override

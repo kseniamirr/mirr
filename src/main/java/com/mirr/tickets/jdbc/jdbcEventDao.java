@@ -1,7 +1,10 @@
 package com.mirr.tickets.jdbc;
 
+import com.mirr.tickets.dao.EventDao;
 import com.mirr.tickets.dao.GenericDao;
 import com.mirr.tickets.events.Event;
+import com.mirr.tickets.events.Seance;
+import com.mirr.tickets.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,19 +15,17 @@ import java.util.*;
 
 @Repository
 @Qualifier("genericDao")
-public class jdbcEventDao implements GenericDao<Event> {
+public class jdbcEventDao implements EventDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public JdbcTemplate jdbcTemplate() {
-        return jdbcTemplate;
-    }
-
     @Override
-    public void add(Event event) {
-        jdbcTemplate.update("INSERT INTO event_table (event_id, eventName, base_price, event_raiting) VALUES (1, Born a star, 95,00, HIGH)", event.getEventId(), event.getEventName(), event.getBasePrice(), event.getEventRating());
+    public Event add(Event event) {
+        jdbcTemplate.update("INSERT INTO events (event_id, eventName, base_price, event_raiting) VALUES (1, Born a star, 95,00, HIGH)", event.getEventId(), event.getEventName(), event.getBasePrice(), event.getEventRating());
         System.out.println("Event added!");
+        event = getEventByName(event.getEventName()).orElseThrow(() -> new RuntimeException("added event is not found"));
+        return event;
 
     }
 
@@ -50,5 +51,16 @@ public class jdbcEventDao implements GenericDao<Event> {
     @Override
     public void update(Event event, String[] params) {
         jdbcTemplate.update("INSERT INTO event_table SET eventName WHERE event_id = 2", event.getEventName(), event);
+    }
+
+    @Override
+    public Optional<Event> getEventByName(String name) {
+        Event event = jdbcTemplate.queryForObject("SELECT * from events WHERE eventName = ?", new String[] {name}, new BeanPropertyRowMapper<>(Event.class));
+        return Optional.of(event);
+    }
+
+    @Override
+    public Seance saveSeance(Seance seance) {
+        return null;
     }
 }

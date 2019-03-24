@@ -14,7 +14,7 @@ public class AuditoriumDao implements  GenericDao<Auditorium> {
     public static NavigableSet<Auditorium> auditoriumSet = new TreeSet<>(AuditoriumDao::compareByName);
 
     @Override
-    public void add(Auditorium auditorium) {
+    public Auditorium add(Auditorium auditorium) {
         throw new UnsupportedOperationException("This operation is not supported for Auditorium");
     }
 

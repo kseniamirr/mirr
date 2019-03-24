@@ -1,7 +1,9 @@
 package com.mirr.tickets.users;
 
+import com.mirr.tickets.dao.GenericDao;
 import com.mirr.tickets.dao.UserDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -11,19 +13,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    public UserDaoImpl userDaoImpl;
+    @Qualifier("userDaoDB")
+    public UserDao userDaoImpl;
 
     @Override
     public User save(User user) {
-        if (user.getUserId() == 0) {
-            try {
-                user.setUserId(userDaoImpl.navigableUsers.last().getUserId() + 1);
-            } catch (NoSuchElementException e) {
-                user.setUserId(0);
-            }
-        }
-        userDaoImpl.add(user);
-        return user;
+        return userDaoImpl.add(user);
     }
 
     @Override
