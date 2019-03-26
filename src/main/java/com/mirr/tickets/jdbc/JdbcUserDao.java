@@ -62,7 +62,8 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        User user = jdbcTemplate.queryForObject("SELECT * from users WHERE email = ?", new String[] {email}, new BeanPropertyRowMapper<>(User.class));
+        List<User> userList = jdbcTemplate.query("SELECT * from users WHERE email = ? order by user_id", new String[] {email}, new BeanPropertyRowMapper<>(User.class));
+        User user = (userList.isEmpty()? null : userList.get(userList.size() - 1));
         return Optional.of(user);
     }
 }
